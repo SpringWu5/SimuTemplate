@@ -10,6 +10,7 @@
 #include "DetectorConstruction/DetectorFactory.hh"
 #include "DetectorConstruction/SLabBuilder.hh"
 #include "DetectorConstruction/MuonCubeConstruction.hh"
+#include "DetectorConstruction/SingleSlabSiPMTest.hh"
 
 #include "Util/Logger.hh"
 #include "spdlog/spdlog.h"
@@ -35,6 +36,10 @@ DetectorConstructionBase* DetectorFactory::Create(const G4String& detectorType,
     else if (typeLower == "muoncube" || typeLower == "cube") {
         logger->info("Instantiating MuonCube detector (8x8x4 voxel array)");
         return new MuonCubeConstruction(config_path);
+    }
+    else if (typeLower == "sipmtest" || typeLower == "slabsipm" || typeLower == "singleSlabsipm") {
+        logger->info("Instantiating SingleSlabSiPMTest detector (SiPM-sizing experiment)");
+        return new SingleSlabSiPMTest(config_path);
     }
     else {
         logger->error("Unknown detector type: {}", detectorType.c_str());

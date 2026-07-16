@@ -13,13 +13,17 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_DIR="$( cd "$SCRIPT_DIR/.." && pwd )"
 
-# Source the env with nounset temporarily OFF (conda activation references
-# unbound vars like PS1 that abort under `set -u`).
+# Source the software environment (same resolution order as the simulation
+# wrapper): $SIMU_ENV -> bundled env/inpac.sh -> CVMFS LCG view fallback.
+# Source with nounset temporarily OFF (site env scripts may reference unbound
+# vars like PS1 that abort under `set -u`).
 set +u
-if [ -f ~mocen/hailing.env ]; then
+if [ -n "${SIMU_ENV:-}" ] && [ -f "${SIMU_ENV}" ]; then
     # shellcheck disable=SC1090
-    source ~mocen/hailing.env
-    export PATH=/lustre/collider/mocen/software/condaenv/hailing/bin:${PATH}
+    source "${SIMU_ENV}"
+elif [ -f "$PROJECT_DIR/env/inpac.sh" ]; then
+    # shellcheck disable=SC1091
+    source "$PROJECT_DIR/env/inpac.sh"
 else
     source /cvmfs/sft.cern.ch/lcg/views/LCG_98python3/x86_64-centos7-gcc9-opt/setup.sh
 fi

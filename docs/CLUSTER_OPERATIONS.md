@@ -10,24 +10,31 @@ analysis.**
 
 ## 1. Environment setup (MANDATORY)
 
-Before **any** compile / simulation / analysis, source the environment. It
-provides Geant4, ROOT, Python 3 (numpy/matplotlib/uproot/awkward/scipy), GCC,
+Before **any** compile / simulation / analysis, activate a software environment
+that provides Geant4 (>=10.6), ROOT (>=6), Python 3 (with
+numpy/matplotlib/uproot/awkward/scipy), GCC, yaml-cpp, spdlog, nlohmann_json,
 and all Geant4 data paths.
 
+The build/run system is driven by a single env-var hook, `SIMU_ENV`, which
+points at a site env script under `env/`. That script activates the software
+**and** exports the CMake hints (`Geant4_DIR`, `ROOT_DIR`, `CMAKE_PREFIX_PATH`),
+so no cluster-specific path ever appears in build commands or job wrappers.
+
 ```bash
-source ~mocen/hailing.env
-export PATH=/lustre/collider/mocen/software/condaenv/hailing/bin:$PATH
+export SIMU_ENV=$PWD/env/inpac.sh         # SJTU INPAC (bundled)
+# export SIMU_ENV=$PWD/env/<yoursite>.sh  # other clusters (copy simu_env.example.sh)
+source "$SIMU_ENV"
 ```
 
-Fallback (if `hailing.env` is unavailable):
+The job wrappers (`jobs/run_*_wrapper.sh`) source the env automatically, in this
+order: `$SIMU_ENV` → bundled `env/inpac.sh` → CVMFS LCG view fallback. The
+HTCondor `.sub` files set `getenv = True`, so `SIMU_ENV` propagates to worker
+nodes — set it once in your submit shell.
+
+CVMFS-only fallback (no `SIMU_ENV`, no `env/inpac.sh`):
 ```bash
 source /cvmfs/sft.cern.ch/lcg/views/LCG_98python3/x86_64-centos7-gcc9-opt/setup.sh
 ```
-
-Key locations in the conda env (`/lustre/collider/mocen/software/condaenv/hailing`):
-- `bin/geant4-config`, `bin/root-config`
-- `lib/Geant4-10.6.3`  → pass as `-DGeant4_DIR`
-- `cmake`               → pass as `-DROOT_DIR`
 
 ---
 
@@ -35,13 +42,10 @@ Key locations in the conda env (`/lustre/collider/mocen/software/condaenv/hailin
 
 ```bash
 cd /lustre/YOUR_GROUP/YOUR_USERNAME/simu_template
-source ~mocen/hailing.env
-export PATH=/lustre/collider/mocen/software/condaenv/hailing/bin:$PATH
+export SIMU_ENV=$PWD/env/inpac.sh   # or env/<yoursite>.sh
+source "$SIMU_ENV"                  # exports Geant4_DIR/ROOT_DIR/CMAKE_PREFIX_PATH
 
-cmake -S . -B build \
-      -DGeant4_DIR=/lustre/collider/mocen/software/condaenv/hailing/lib/Geant4-10.6.3 \
-      -DROOT_DIR=/lustre/collider/mocen/software/condaenv/hailing/cmake \
-      -DCMAKE_PREFIX_PATH=/lustre/collider/mocen/software/condaenv/hailing
+cmake -S . -B build                 # hints come from the env, no site paths
 cmake --build build -j8
 ```
 
@@ -126,8 +130,8 @@ Status codes: `R`=running, `I`=idle, `H`=held, `C`=completed.
 | Symptom                          | Cause                          | Fix                                          |
 |----------------------------------|--------------------------------|----------------------------------------------|
 | `SimuTemplate: command not found`| not in build dir / not built   | wrapper `cd build`; or build first           |
-| `ImportError: uproot`            | env not sourced                | `source ~mocen/hailing.env` at top of script |
-| `G4ENSDFSTATEDATA not set`       | env incomplete                 | use `hailing.env`                            |
+| `ImportError: uproot`            | env not sourced                | `source "$SIMU_ENV"` at top of script            |
+| `G4ENSDFSTATEDATA not set`       | env incomplete                 | use a complete env script (env/inpac.sh or your site) |
 | Job stuck in `I` (idle)          | cluster busy / request too big | reduce `request_cpus` or wait                |
 | Job goes `H` (held)              | execution error                | read `jobs/logs/<id>.err`                    |
 | No output file                   | bad path / permissions         | use absolute paths; check write perms        |
@@ -140,8 +144,8 @@ Status codes: `R`=running, `I`=idle, `H`=held, `C`=completed.
 
 ```bash
 # One-time setup
-source ~mocen/hailing.env
-export PATH=/lustre/collider/mocen/software/condaenv/hailing/bin:$PATH
+export SIMU_ENV=$PWD/env/inpac.sh   # or env/<yoursite>.sh
+source "$SIMU_ENV"
 cd /lustre/YOUR_GROUP/YOUR_USERNAME/simu_template
 
 # Fresh build

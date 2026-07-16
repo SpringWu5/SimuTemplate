@@ -31,13 +31,15 @@ one; it tells you exactly which file to open for any given task.
   `scripts/export_vrml*.sh` + `macros/*.mac`.
 
 ## Build & run (login node)
+The software env is **not hardcoded** anywhere: point `SIMU_ENV` at a site env
+script under `env/` (e.g. `env/inpac.sh` for SJTU INPAC, or a copy of
+`env/simu_env.example.sh` for another cluster). It activates Geant4+ROOT and
+exports `Geant4_DIR` / `ROOT_DIR` / `CMAKE_PREFIX_PATH`.
 ```bash
-source ~mocen/hailing.env
-export PATH=/lustre/collider/mocen/software/condaenv/hailing/bin:$PATH
+export SIMU_ENV=$PWD/env/inpac.sh   # or your env/<site>.sh
+source "$SIMU_ENV"
 cd /lustre/YOUR_GROUP/YOUR_USERNAME/simu_template
-cmake -S . -B build -DGeant4_DIR=/lustre/collider/mocen/software/condaenv/hailing/lib/Geant4-10.6.3 \
-      -DROOT_DIR=/lustre/collider/mocen/software/condaenv/hailing/cmake \
-      -DCMAKE_PREFIX_PATH=/lustre/collider/mocen/software/condaenv/hailing
+cmake -S . -B build          # CMake hints come from the env, no site paths here
 cmake --build build -j8
 cd build && ./SimuTemplate ../config/config.yaml output.root
 ```

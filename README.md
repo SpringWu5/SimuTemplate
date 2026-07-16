@@ -56,18 +56,24 @@ references or delete once you have your own.
 
 ## 2. Build & run
 
-> INPAC cluster: source the environment first.
-> ```bash
-> source ~mocen/hailing.env
-> export PATH=/lustre/collider/mocen/software/condaenv/hailing/bin:$PATH
-> ```
+SimuTemplate needs a C++17 compiler plus Geant4 (>=10.6), ROOT (>=6),
+yaml-cpp, spdlog and nlohmann_json, all visible to CMake.
+
+**Set up the software environment.** Point `SIMU_ENV` at a site env script that
+activates Geant4+ROOT and exports `Geant4_DIR` / `ROOT_DIR` / `CMAKE_PREFIX_PATH`.
+Templates are provided under `env/`:
 
 ```bash
-cd simu_template
-cmake -S . -B build \
-      -DGeant4_DIR=/lustre/collider/mocen/software/condaenv/hailing/lib/Geant4-10.6.3 \
-      -DROOT_DIR=/lustre/collider/mocen/software/condaenv/hailing/cmake \
-      -DCMAKE_PREFIX_PATH=/lustre/collider/mocen/software/condaenv/hailing
+# SJTU INPAC cluster (bundled, ready to use):
+export SIMU_ENV=$PWD/env/inpac.sh
+# Other clusters: copy env/simu_env.example.sh -> env/<yoursite>.sh, edit it, then:
+#   export SIMU_ENV=$PWD/env/<yoursite>.sh
+```
+
+**Build** (the env exports the CMake hints, so no site paths go on the command line):
+```bash
+source "$SIMU_ENV"
+cmake -S . -B build
 cmake --build build -j8
 ```
 

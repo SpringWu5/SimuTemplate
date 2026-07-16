@@ -293,10 +293,9 @@ Data files referenced (`SP101.txt`, `SiPM_PDE.txt`, `WLS_*.txt`,
 ## 8. Build / run / submit (summary — full detail in `docs/CLUSTER_OPERATIONS.md`)
 
 ```bash
-source ~mocen/hailing.env
-export PATH=/lustre/collider/mocen/software/condaenv/hailing/bin:$PATH
-cmake -S . -B build -DGeant4_DIR=.../lib/Geant4-10.6.3 -DROOT_DIR=.../cmake \
-      -DCMAKE_PREFIX_PATH=.../hailing
+export SIMU_ENV=$PWD/env/inpac.sh   # or env/<yoursite>.sh; exports CMake hints
+source "$SIMU_ENV"
+cmake -S . -B build                 # Geant4_DIR/ROOT_DIR come from the env
 cmake --build build -j8
 ./build/SimuTemplate config/config.yaml output.root      # batch
 condor_submit jobs/simulation.sub                          # production (HTCondor)

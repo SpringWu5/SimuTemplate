@@ -14,13 +14,6 @@
 #include <ctime>
 #include <vector>
 
-// Storage for photon statistics across events
-namespace {
-    std::vector<int> g_cerenkov_counts;
-    std::vector<int> g_scintillation_counts;
-    std::vector<int> g_wls_counts;  // Add WLS photon counting
-}
-
 SteppingAction::SteppingAction(EventAction* eventAction)
 : G4UserSteppingAction(),
   fEventAction(eventAction),
@@ -63,16 +56,16 @@ void SteppingAction::OutputFinalStatistics()
     if (totalEvents <= 0) totalEvents = 1; // Safety check
     
     // Finalize the logging with comprehensive summary
-    LogUtils::finalize_logging(totalEvents, particleCountsStd, g_cerenkov_counts, g_scintillation_counts);
+    LogUtils::finalize_logging(totalEvents, particleCountsStd, fCerenkovCounts, fScintillationCounts);
 }
 
 // Modified parameter names to avoid variable shadowing
 void SteppingAction::OutputPhotonStatistics(G4int eventID, G4int cerCount, G4int scintCount)
 {
     // Store counts for summary statistics
-    g_cerenkov_counts.push_back(cerCount);
-    g_scintillation_counts.push_back(scintCount);
-    
+    fCerenkovCounts.push_back(cerCount);
+    fScintillationCounts.push_back(scintCount);
+
     // Use the enhanced logging system
     LogUtils::log_photon_statistics(eventID, cerCount, scintCount);
 }
@@ -320,9 +313,6 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
     if (opticalTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()) {
         const G4VProcess* creatorProcess = opticalTrack->GetCreatorProcess();
         if (creatorProcess && creatorProcess->GetProcessName() == "OpWLS") {
-
-            G4StepPoint* wlsPostStep = step->GetPostStepPoint();
-            G4StepPoint* wlsPreStep = step->GetPreStepPoint();
 
             // Track boundary crossings
             // PRODUCTION: Disabled for performance (uncomment for debugging)

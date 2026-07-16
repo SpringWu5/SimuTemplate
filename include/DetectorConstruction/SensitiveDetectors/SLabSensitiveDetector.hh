@@ -21,9 +21,6 @@ public:
     SLabSensitiveDetector(G4String);
     ~SLabSensitiveDetector();
     G4bool ProcessHits(G4Step *step, G4TouchableHistory *);
-
-private:
-    void DumpInfo(G4Step *step, G4TouchableHistory *touchable);
 };
 
 #endif

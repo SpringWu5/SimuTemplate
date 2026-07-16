@@ -9,10 +9,8 @@
 #define HITS_HH
 
 #include "TTree.h"
-#include "vector"
+#include <vector>
 #include "TString.h"
-
-using std::vector;
 
 enum HitType {
     OpticalPhoton = 0,
@@ -81,34 +79,34 @@ public:
     }
 
     // const Getters
-    vector<unsigned int> GetHitType() const { return fHitType; }
-    vector<int> GetParticleID() const { return fParticleID; }
-    vector<int> GetHitDetID() const { return fHitDetID; }
-    vector<Float_t> GetEnergy() const { return fEnergy; }
-    vector<Float_t> GetHitPX() const { return fHitPX; }
-    vector<Float_t> GetHitPY() const { return fHitPY; }
-    vector<Float_t> GetHitPZ() const { return fHitPZ; }
-    vector<Float_t> GetHitPosX() const { return fHitPosX; }
-    vector<Float_t> GetHitPosY() const { return fHitPosY; }
-    vector<Float_t> GetHitPosZ() const { return fHitPosZ; }
-    vector<Float_t> GetHitTime() const { return fHitTime; }
-    vector<Float_t> GetHitStepLen() const { return fHitStepLen; }
-    vector<Float_t> GetHitWavelength() const { return fHitWavelength; }
+    std::vector<unsigned int> GetHitType() const { return fHitType; }
+    std::vector<int> GetParticleID() const { return fParticleID; }
+    std::vector<int> GetHitDetID() const { return fHitDetID; }
+    std::vector<Float_t> GetEnergy() const { return fEnergy; }
+    std::vector<Float_t> GetHitPX() const { return fHitPX; }
+    std::vector<Float_t> GetHitPY() const { return fHitPY; }
+    std::vector<Float_t> GetHitPZ() const { return fHitPZ; }
+    std::vector<Float_t> GetHitPosX() const { return fHitPosX; }
+    std::vector<Float_t> GetHitPosY() const { return fHitPosY; }
+    std::vector<Float_t> GetHitPosZ() const { return fHitPosZ; }
+    std::vector<Float_t> GetHitTime() const { return fHitTime; }
+    std::vector<Float_t> GetHitStepLen() const { return fHitStepLen; }
+    std::vector<Float_t> GetHitWavelength() const { return fHitWavelength; }
 
 private:
-    vector<unsigned int> fHitType;
-    vector<int> fParticleID;
-    vector<int> fHitDetID;
-    vector<Float_t> fEnergy;
-    vector<Float_t> fHitPX;
-    vector<Float_t> fHitPY;
-    vector<Float_t> fHitPZ;
-    vector<Float_t> fHitPosX;
-    vector<Float_t> fHitPosY;
-    vector<Float_t> fHitPosZ;
-    vector<Float_t> fHitTime;
-    vector<Float_t> fHitStepLen;
-    vector<Float_t> fHitWavelength;  // Phase 2.4: Optical wavelength (nm)
+    std::vector<unsigned int> fHitType;
+    std::vector<int> fParticleID;
+    std::vector<int> fHitDetID;
+    std::vector<Float_t> fEnergy;
+    std::vector<Float_t> fHitPX;
+    std::vector<Float_t> fHitPY;
+    std::vector<Float_t> fHitPZ;
+    std::vector<Float_t> fHitPosX;
+    std::vector<Float_t> fHitPosY;
+    std::vector<Float_t> fHitPosZ;
+    std::vector<Float_t> fHitTime;
+    std::vector<Float_t> fHitStepLen;
+    std::vector<Float_t> fHitWavelength;  // Phase 2.4: Optical wavelength (nm)
 };
 
 

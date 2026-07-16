@@ -1,9 +1,8 @@
 #pragma once
 
 #include "nlohmann/json.hpp"
-#include "vector"
+#include <vector>
 using json = nlohmann::json;
-
 // a representation of particle
 // units used are meter for position, ns for time GeV for momentum
 struct McParticle {

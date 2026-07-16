@@ -19,22 +19,29 @@
 #include <spdlog/spdlog.h>
 
 namespace {
-// Scalar per-volume buffers (one TTree row == one placed physical volume).
+// Per-export row buffers (one TTree row == one placed physical volume).
 // std::string is used so ROOT stores a TString-backed branch.
-std::string gName;
-std::string gPhysName;
-int         gCopyNo;
-std::string gMaterial;
-double      gX, gY, gZ;
-double      gDX, gDY, gDZ;
-int         gDepth;
-long        gCount = 0;
-} // namespace
+// All buffers are local to each Export() call -> no shared/global state, so
+// the exporter is safe to use from a single thread per run (and trivially
+// re-entrant across runs).
+struct ExportBuffers {
+    std::string name;
+    std::string physName;
+    std::string material;
+    int copyNo = 0;
+    double x = 0, y = 0, z = 0;
+    double dx = 0, dy = 0, dz = 0;
+    int depth = 0;
+    long count = 0;
+};
 
-void GeometryExporter::Traverse(G4VPhysicalVolume* volume,
-                                const G4ThreeVector& motherTranslation,
-                                int depth,
-                                TTree* tree)
+// Recursive traversal accumulating global translation; fills one TTree row
+// per placed physical volume.
+void Traverse(G4VPhysicalVolume* volume,
+              const G4ThreeVector& motherTranslation,
+              int depth,
+              TTree* tree,
+              ExportBuffers& b)
 {
     if (!volume || !tree) return;
 
@@ -55,25 +62,26 @@ void GeometryExporter::Traverse(G4VPhysicalVolume* volume,
         dz = (pmax.z() - pmin.z()) / CLHEP::mm;
     }
 
-    gName     = logical ? std::string(logical->GetName())   : "";
-    gPhysName = std::string(volume->GetName());
-    gCopyNo   = volume->GetCopyNo();
-    gMaterial = material ? std::string(material->GetName()) : "";
-    gX = globalPos.x() / CLHEP::mm;
-    gY = globalPos.y() / CLHEP::mm;
-    gZ = globalPos.z() / CLHEP::mm;
-    gDX = dx; gDY = dy; gDZ = dz;
-    gDepth = depth;
+    b.name     = logical ? std::string(logical->GetName())   : "";
+    b.physName = std::string(volume->GetName());
+    b.copyNo   = volume->GetCopyNo();
+    b.material = material ? std::string(material->GetName()) : "";
+    b.x = globalPos.x() / CLHEP::mm;
+    b.y = globalPos.y() / CLHEP::mm;
+    b.z = globalPos.z() / CLHEP::mm;
+    b.dx = dx; b.dy = dy; b.dz = dz;
+    b.depth = depth;
 
     tree->Fill();
-    ++gCount;
+    ++b.count;
 
     if (logical) {
         for (size_t i = 0; i < logical->GetNoDaughters(); ++i) {
-            Traverse(logical->GetDaughter(i), globalPos, depth + 1, tree);
+            Traverse(logical->GetDaughter(i), globalPos, depth + 1, tree, b);
         }
     }
 }
+} // namespace
 
 G4bool GeometryExporter::Export(G4VPhysicalVolume* world,
                                 const G4String& rootFilename,
@@ -90,26 +98,26 @@ G4bool GeometryExporter::Export(G4VPhysicalVolume* world,
         return false;
     }
 
-    gCount = 0;
+    ExportBuffers b;
 
     TTree* tree = new TTree(treeName, "Generic Geant4 geometry model");
-    tree->Branch("Name",     &gName);
-    tree->Branch("PhysName", &gPhysName);
-    tree->Branch("CopyNo",   &gCopyNo);
-    tree->Branch("Material", &gMaterial);
-    tree->Branch("X",        &gX);
-    tree->Branch("Y",        &gY);
-    tree->Branch("Z",        &gZ);
-    tree->Branch("DX",       &gDX);
-    tree->Branch("DY",       &gDY);
-    tree->Branch("DZ",       &gDZ);
-    tree->Branch("Depth",    &gDepth);
+    tree->Branch("Name",     &b.name);
+    tree->Branch("PhysName", &b.physName);
+    tree->Branch("CopyNo",   &b.copyNo);
+    tree->Branch("Material", &b.material);
+    tree->Branch("X",        &b.x);
+    tree->Branch("Y",        &b.y);
+    tree->Branch("Z",        &b.z);
+    tree->Branch("DX",       &b.dx);
+    tree->Branch("DY",       &b.dy);
+    tree->Branch("DZ",       &b.dz);
+    tree->Branch("Depth",    &b.depth);
 
     G4ThreeVector origin(0, 0, 0);
-    Traverse(world, origin, 0, tree);
+    Traverse(world, origin, 0, tree, b);
 
     tree->Write();
 
-    spdlog::info("GeometryExporter: exported {} volumes", gCount);
+    spdlog::info("GeometryExporter: exported {} volumes", b.count);
     return true;
 }

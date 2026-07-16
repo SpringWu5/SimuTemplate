@@ -163,33 +163,3 @@ G4bool SLabSensitiveDetector::ProcessHits(G4Step *step, G4TouchableHistory *)
 
     return true;
 }
-
-void SLabSensitiveDetector::DumpInfo(G4Step *step,
-                                    G4TouchableHistory *touchable)
-{
-    // code for understanding the return value of Geant4 function
-    G4cout << "*******************************" << G4endl;
-    G4cout << "             Slab HIT           " << G4endl;
-    G4cout << "  touchable->GetVolume(0)->GetCopyNo(): "
-            << touchable->GetVolume(0)->GetCopyNo() << G4endl;
-    G4cout << "  touchable->GetVolume(0)->GetTranslation(): "
-            << touchable->GetVolume(0)->GetTranslation().x() / CLHEP::mm << " "
-            << touchable->GetVolume(0)->GetTranslation().y() / CLHEP::mm << " "
-            << touchable->GetVolume(0)->GetTranslation().z() / CLHEP::mm << G4endl;
-    G4cout << "  step->GetTrack()->GetKineticEnergy() (eV) : "
-            << step->GetTrack()->GetKineticEnergy() / CLHEP::eV << G4endl;
-    G4ThreeVector VecSlabToMuon = step->GetPreStepPoint()->GetPosition() -
-                                    touchable->GetVolume(0)->GetTranslation();
-    G4cout << "  VecSlabToMuon (mm) : " << VecSlabToMuon.x() / CLHEP::mm << " "
-            << VecSlabToMuon.y() / CLHEP::mm << " "
-            << VecSlabToMuon.z() / CLHEP::mm << G4endl;
-    G4cout << "  step->GetPreStepPoint()->GetMomentumDirection(): "
-            << step->GetPreStepPoint()->GetMomentumDirection().x() << " "
-            << step->GetPreStepPoint()->GetMomentumDirection().y() << " "
-            << step->GetPreStepPoint()->GetMomentumDirection().z() << G4endl;
-    G4cout << "  step->GetPreStepPoint()->GetGlobalTime() (ns): "
-            << step->GetPreStepPoint()->GetGlobalTime() / CLHEP::ns << G4endl;
-    G4cout << "  step->GetTrack()->GetStepLength() (mm): "
-            << step->GetTrack()->GetStepLength() / CLHEP::mm << G4endl;
-    G4cout << "*******************************" << G4endl << G4endl;
-}

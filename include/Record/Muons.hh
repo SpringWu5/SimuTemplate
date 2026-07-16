@@ -10,9 +10,7 @@
 #define MUONS_HH
 
 #include "TTree.h"
-#include "vector"
-
-using std::vector;
+#include <vector>
 
 class Muons
 {
@@ -59,10 +57,10 @@ public:
 
 public:
     // For debugging purposes - make vectors accessible
-    vector<Float_t> fEnergy;
-    vector<Float_t> fPx;
-    vector<Float_t> fPy;
-    vector<Float_t> fPz;
+    std::vector<Float_t> fEnergy;
+    std::vector<Float_t> fPx;
+    std::vector<Float_t> fPy;
+    std::vector<Float_t> fPz;
 
 private:
     Float_t fWeightSpectrum;

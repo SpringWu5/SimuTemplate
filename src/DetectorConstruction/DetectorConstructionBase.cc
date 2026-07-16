@@ -16,6 +16,8 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ThreeVector.hh"
 
+#include <stdexcept>
+
 DetectorConstructionBase::DetectorConstructionBase(const char* config_path)
     : fConfigPath(config_path),
       fWorldPhysical(nullptr),
@@ -24,7 +26,12 @@ DetectorConstructionBase::DetectorConstructionBase(const char* config_path)
     fLogger = create_logger("DetectorConstructionBase");
 
     // Initialize MaterialManager with the configuration
-    MaterialManager::Instance()->BuildEverything(config_path);
+    if (!MaterialManager::Instance()->BuildEverything(config_path)) {
+        fLogger->error("Failed to build materials from config: {}", config_path);
+        throw std::runtime_error(
+            "DetectorConstructionBase: MaterialManager::BuildEverything failed for " +
+            std::string(config_path));
+    }
 }
 
 G4VPhysicalVolume* DetectorConstructionBase::Construct()

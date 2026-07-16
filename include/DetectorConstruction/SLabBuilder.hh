@@ -17,9 +17,7 @@
 #include "G4LogicalVolume.hh"
 #include "G4VSolid.hh"
 #include "G4Transform3D.hh"
-#include "vector"
-
-using std::vector;
+#include <vector>
 
 /**
  * @brief MuonSLab detector construction
@@ -64,7 +62,7 @@ private:
      * @brief Calculate transform matrices for SiPM placement
      * @return Vector of transforms for each SiPM position
      */
-    vector<G4Transform3D> GetTransformsForSiPMs();
+    std::vector<G4Transform3D> GetTransformsForSiPMs();
 
     /**
      * @brief Build solid geometry for slabs, ESR, tape

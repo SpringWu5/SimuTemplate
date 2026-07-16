@@ -1,6 +1,6 @@
-file(GLOB sources 
-     ${CMAKE_CURRENT_SOURCE_DIR}/**/*.cc 
-     ${CMAKE_CURRENT_SOURCE_DIR}/**/**/*.cc 
+file(GLOB sources CONFIGURE_DEPENDS
+     ${CMAKE_CURRENT_SOURCE_DIR}/**/*.cc
+     ${CMAKE_CURRENT_SOURCE_DIR}/**/**/*.cc
      ${CMAKE_CURRENT_SOURCE_DIR}/**/*.cpp)
 
 add_library(SimuTemplateLib STATIC

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 project(SimuTemplate)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -30,8 +30,8 @@ if(NOT ROOT_FOUND)
 endif()
 
 # Find packages used in the project
-find_package(yaml-cpp)
-find_package(spdlog)
+find_package(yaml-cpp REQUIRED)
+find_package(spdlog REQUIRED)
 
 # nlohmann_json (header-only, vendored with Geant4/ROOT include paths usually)
 find_package(nlohmann_json 3.2.0 QUIET)

@@ -43,34 +43,6 @@ public:
     virtual void EndOfEvent(G4HCofThisEvent*) override;
 
 private:
-    /**
-     * @brief Map hit position to fiber ID
-     *
-     * @param planeName Which SiPM plane ("X+", "X-", "Y+", "Y-", "Z+", "Z-")
-     * @param x Hit x position (mm)
-     * @param y Hit y position (mm)
-     * @param z Hit z position (mm)
-     * @return Fiber ID (encoded as appropriate for the plane)
-     */
-    G4int MapPositionToFiberID(const G4String& planeName,
-                               G4double x, G4double y, G4double z);
-
-    /**
-     * @brief Map copy number to fiber ID
-     *
-     * Decodes the physical volume copy number to determine which SiPM
-     * was hit and returns the corresponding fiber ID.
-     *
-     * Copy number scheme (from MuonCubeConstruction):
-     * - Z-SiPMs: 0-127 (8x8 grid at Z+ and Z-)
-     * - X-SiPMs: 128-191 (8x4 grid at X+ and X-)
-     * - Y-SiPMs: 192-255 (8x4 grid at Y+ and Y-)
-     *
-     * @param copyNo The copy number from GetCopyNumber()
-     * @return Fiber ID (10000+ for Z, 20000+ for X, 30000+ for Y)
-     */
-    G4int MapCopyNumberToFiberID(G4int copyNo);
-
     G4int fTotalOpticalHits;      // Total optical photons detected
     G4int fTotalWLPHits;          // WLS photons detected
 };

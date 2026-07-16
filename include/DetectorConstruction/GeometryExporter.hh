@@ -55,14 +55,6 @@ public:
     static G4bool Export(G4VPhysicalVolume* world,
                          const G4String& rootFilename,
                          const G4String& treeName = "GeometryModel");
-
-private:
-    // Recursive traversal accumulating global translation; fills one TTree
-    // row per placed physical volume.
-    static void Traverse(G4VPhysicalVolume* volume,
-                         const G4ThreeVector& motherTranslation,
-                         int depth,
-                         class TTree* tree);
 };
 
 #endif // GEOMETRYEXPORTER_HH

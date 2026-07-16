@@ -40,22 +40,26 @@ bool MaterialManager::BuildEverything(const G4String &fileYAML)
 
 void MaterialManager::LoadYAML()
 {
-    // Load SLab geometry
+    // Load SLab geometry (optional: not every detector uses the SLab layout)
     auto node = rootNode["Geometry"]["SLab"];
-    fSLabGeometry.Scintxlength = node["Scintillator"]["x_length"].as<double>() * cm;
-    fSLabGeometry.Scintylength = node["Scintillator"]["y_length"].as<double>() * cm;
-    fSLabGeometry.Scintzlength = node["Scintillator"]["z_length"].as<double>() * cm;
-    fSLabGeometry.ESRthickness = node["ESR"]["thickness"].as<double>() * cm;
-    fSLabGeometry.Tapethickness = node["Tape"]["thickness"].as<double>() * cm;
-    fSLabGeometry.SiPMxlength = node["SiPM"]["x_length"].as<double>() * cm;
-    fSLabGeometry.SiPMylength = node["SiPM"]["y_length"].as<double>() * cm;
-    fSLabGeometry.SiPMzlength = node["SiPM"]["z_length"].as<double>() * cm;
-    fSLabGeometry.Batteryxlength = node["Battery"]["x_length"].as<double>() * cm;
-    fSLabGeometry.Batteryylength = node["Battery"]["y_length"].as<double>() * cm;
-    fSLabGeometry.Batteryzlength = node["Battery"]["z_length"].as<double>() * cm;
+    if (node) {
+        fSLabGeometry.Scintxlength = node["Scintillator"]["x_length"].as<double>() * cm;
+        fSLabGeometry.Scintylength = node["Scintillator"]["y_length"].as<double>() * cm;
+        fSLabGeometry.Scintzlength = node["Scintillator"]["z_length"].as<double>() * cm;
+        fSLabGeometry.ESRthickness = node["ESR"]["thickness"].as<double>() * cm;
+        fSLabGeometry.Tapethickness = node["Tape"]["thickness"].as<double>() * cm;
+        fSLabGeometry.SiPMxlength = node["SiPM"]["x_length"].as<double>() * cm;
+        fSLabGeometry.SiPMylength = node["SiPM"]["y_length"].as<double>() * cm;
+        fSLabGeometry.SiPMzlength = node["SiPM"]["z_length"].as<double>() * cm;
+        fSLabGeometry.Batteryxlength = node["Battery"]["x_length"].as<double>() * cm;
+        fSLabGeometry.Batteryylength = node["Battery"]["y_length"].as<double>() * cm;
+        fSLabGeometry.Batteryzlength = node["Battery"]["z_length"].as<double>() * cm;
 
-    fSLabGeometry.numberOfSlabs = node["Layout"]["number_of_slabs"].as<int>();
-    fSLabGeometry.slabOffsets = node["Layout"]["slab_offsets"].as<std::vector<double>>();
+        fSLabGeometry.numberOfSlabs = node["Layout"]["number_of_slabs"].as<int>();
+        fSLabGeometry.slabOffsets = node["Layout"]["slab_offsets"].as<std::vector<double>>();
+    } else {
+        logger->warn("Geometry.SLab node not found in config; SLab geometry left at defaults");
+    }
 
     // Load sea optical properties
     string pathFile = rootNode["Property"]["sea_optical_property"]["path_file"].as<string>();
@@ -414,22 +418,6 @@ G4MaterialPropertiesTable* MaterialManager::SetOpticalPropertiesOfPS()
 	mptPlScin->AddProperty("RINDEX", photonEnergy, EJ200_RIND, nEntries);//->SetSpline(true);
 
     return mptPlScin;
-}
-
-float *MaterialManager::GetArrayProperites()
-{
-    int num = fSeaOpticalProperty.num;
-    float *propertis = new float [5*num];
-    for (int i = 0; i < num; i++)
-    {
-        int idx = 5*i;
-        propertis[idx+0] = fSeaOpticalProperty.refracIdxPhase[i];
-        propertis[idx+1] = fSeaOpticalProperty.refracIdxGroup[i];
-        propertis[idx+2] = fSeaOpticalProperty.absLen[i];
-        propertis[idx+3] = fSeaOpticalProperty.scaLenMie[i];
-        propertis[idx+4] = fSeaOpticalProperty.scaLenRay[i];
-    }
-    return propertis;
 }
 
 bool MaterialManager::LoadSpectrum(const std::string& filename,

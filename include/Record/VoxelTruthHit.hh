@@ -12,12 +12,9 @@
 #define VOXELTRUTHHIT_HH
 
 #include "TTree.h"
-#include "vector"
-#include "map"
+#include <vector>
+#include <map>
 #include "TString.h"
-
-using std::vector;
-using std::map;
 
 /**
  * @brief Voxel-level truth data structure
@@ -219,22 +216,22 @@ public:
 
 private:
     // Voxel identification and totals
-    vector<int> fVoxelID;      // CopyNumber of scintillator voxel
-    vector<double> fEdep;      // Total energy deposited (MeV)
-    vector<double> fTrackLen;  // Total track length (mm)
+    std::vector<int> fVoxelID;      // CopyNumber of scintillator voxel
+    std::vector<double> fEdep;      // Total energy deposited (MeV)
+    std::vector<double> fTrackLen;  // Total track length (mm)
 
     // Entry state (at first step)
-    vector<double> fEntryX, fEntryY, fEntryZ;  // Position (mm)
-    vector<double> fEntryT;                    // Time (ns)
-    vector<double> fEntryE;                    // Kinetic energy (MeV)
+    std::vector<double> fEntryX, fEntryY, fEntryZ;  // Position (mm)
+    std::vector<double> fEntryT;                    // Time (ns)
+    std::vector<double> fEntryE;                    // Kinetic energy (MeV)
 
     // Exit state (at last step)
-    vector<double> fExitX, fExitY, fExitZ;    // Position (mm)
-    vector<double> fExitT;                    // Time (ns)
-    vector<double> fExitE;                    // Kinetic energy (MeV)
+    std::vector<double> fExitX, fExitY, fExitZ;    // Position (mm)
+    std::vector<double> fExitT;                    // Time (ns)
+    std::vector<double> fExitE;                    // Kinetic energy (MeV)
 
     // Map for quick voxel lookup
-    map<int, size_t> fVoxelMap;
+    std::map<int, size_t> fVoxelMap;
 };
 
 #endif // VOXELTRUTHHIT_HH

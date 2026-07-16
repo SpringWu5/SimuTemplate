@@ -79,7 +79,6 @@ public:
     bool BuildEverything(const G4String &fileYAML);
 
     G4Material *GetMaterial(std::string name);
-    float *GetArrayProperites();
     SLabGeometry GetSLabGeometry() { return fSLabGeometry; }
     SipmProperty GetSipmProperty() { return fSipmProperty; }
 

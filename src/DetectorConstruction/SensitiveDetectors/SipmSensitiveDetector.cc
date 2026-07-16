@@ -29,6 +29,8 @@ SipmSensitiveDetector::SipmSensitiveDetector(G4String name) : G4VSensitiveDetect
 
 SipmSensitiveDetector::~SipmSensitiveDetector()
 {
+    delete fInterpPDE;
+    delete fRandomGen;
 }
 
 void SipmSensitiveDetector::LoadSipmPhotonDetectionEfficiency()
@@ -114,33 +116,4 @@ G4bool SipmSensitiveDetector::ProcessHits(G4Step *step, G4TouchableHistory *)
     );
 
     return true;
-}
-
-void SipmSensitiveDetector::DumpInfo(G4Step *step, G4TouchableHistory *touchable)
-{
-    // code for understanding the return value of Geant4 function
-    G4cout << "*******************************" << G4endl;
-    G4cout << "             SiPM HIT           " << G4endl;
-    G4cout << "  touchable->GetCopyNumber(0): "
-            << touchable->GetCopyNumber(0) << G4endl;
-    G4cout << "  touchable->GetCopyNumber(2): "
-            << touchable->GetCopyNumber(2) << G4endl;
-    G4cout << "  touchable->GetVolume(2)->GetTranslation(): "
-            << touchable->GetVolume(2)->GetTranslation().x() / CLHEP::mm << " "
-            << touchable->GetVolume(2)->GetTranslation().y() / CLHEP::mm << " "
-            << touchable->GetVolume(2)->GetTranslation().z() / CLHEP::mm << G4endl;
-    G4cout << "  step->GetTrack()->GetKineticEnergy() (eV) : "
-            << step->GetTrack()->GetKineticEnergy() / CLHEP::eV << G4endl;
-    G4ThreeVector VecSipmToPhoton = step->GetPostStepPoint()->GetPosition() - touchable->GetVolume(2)->GetTranslation();
-    G4cout << "  VecSipmToPhoton (mm) : "
-            << VecSipmToPhoton.x() / CLHEP::mm << " "
-            << VecSipmToPhoton.y() / CLHEP::mm << " "
-            << VecSipmToPhoton.z() / CLHEP::mm << G4endl;
-    G4cout << "  step->GetPostStepPoint()->GetMomentumDirection(): "
-            << step->GetPostStepPoint()->GetMomentumDirection().x() << " "
-            << step->GetPostStepPoint()->GetMomentumDirection().y() << " "
-            << step->GetPostStepPoint()->GetMomentumDirection().z() << G4endl;
-    G4cout << "  step->GetPostStepPoint()->GetGlobalTime() (ns): "
-            << step->GetPostStepPoint()->GetGlobalTime() / CLHEP::ns << G4endl;
-    G4cout << "*******************************" << G4endl << G4endl;
 }

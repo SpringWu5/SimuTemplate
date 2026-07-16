@@ -14,6 +14,9 @@
 #include "DetectorConstruction/MaterialManager.hh"
 #include "DetectorConstruction/SensitiveDetectors/SLabSensitiveDetector.hh"
 
+#include <vector>
+using std::vector;
+
 #include "G4SDManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4Sphere.hh"

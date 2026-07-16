@@ -12,10 +12,8 @@
 #define SIPMHIT_HH
 
 #include "TTree.h"
-#include "vector"
+#include <vector>
 #include "TString.h"
-
-using std::vector;
 
 /**
  * @brief Slim SiPM hit collection for ML pipeline
@@ -52,14 +50,14 @@ public:
     }
 
     // Getters
-    vector<int> GetDetID() const { return fDetID; }
-    vector<double> GetTime() const { return fTime; }
-    vector<double> GetWavelength() const { return fWavelength; }
+    std::vector<int> GetDetID() const { return fDetID; }
+    std::vector<double> GetTime() const { return fTime; }
+    std::vector<double> GetWavelength() const { return fWavelength; }
 
 private:
-    vector<int> fDetID;          // Fiber/Channel ID (with end-bit encoding)
-    vector<double> fTime;        // Hit time (ns)
-    vector<double> fWavelength;  // Wavelength (nm)
+    std::vector<int> fDetID;          // Fiber/Channel ID (with end-bit encoding)
+    std::vector<double> fTime;        // Hit time (ns)
+    std::vector<double> fWavelength;  // Wavelength (nm)
 };
 
 #endif // SIPMHIT_HH

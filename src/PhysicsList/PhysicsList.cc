@@ -104,31 +104,10 @@ PhysicsList::PhysicsList(G4int verbose)
     G4cout << "  - Cerenkov: ON" << G4endl;
     // ============================================================
 
-    //calculator for various physics values
-    G4EmCalculator emCalc;
-    G4ParticleDefinition* mum = G4MuonMinus::Definition();
-
-
-    G4NistManager* nistMan = G4NistManager::Instance();
-
-    G4Element* elH = nistMan->FindOrBuildElement("H");
-    G4Element* elC = nistMan->FindOrBuildElement("C");
-
-    G4Material* concreteMat = nistMan->FindOrBuildMaterial("G4_CONCRETE");
-    G4Material* matPlScin = new G4Material("plScintillator", 1.032 * g / cm3, 2);
-    matPlScin->AddElement(elC, 10);
-    matPlScin->AddElement(elH, 11);
-    matPlScin->GetIonisation()->SetBirksConstant(0.126*mm/MeV); // according to L. Reichhart et al., Phys. Rev, use (0.149*mm/MeV) for neutrons, but otherwise use 0.126
-
-    G4double muEnergy = 1*GeV;
-    G4double rockDEDX = emCalc.ComputeElectronicDEDX(muEnergy, mum, concreteMat);
-    G4double scintDEDX = emCalc.ComputeElectronicDEDX(muEnergy, mum, matPlScin);
-
-    G4cout << "dEdX in rock for mu-: " << rockDEDX << G4endl;
-    G4cout << "dEdX in scintillator for mu-: " << scintDEDX << G4endl;
-
-    emCalc.PrintDEDXTable(mum);
-    emCalc.PrintRangeTable(mum);
+    // NOTE: a dE/dx self-test using G4EmCalculator used to live here. It
+    // constructed a throwaway "plScintillator" material (leaked) and printed
+    // dE/dx before the physics tables were built (always 0, hence misleading).
+    // Removed -- the real dE/dx comes from the registered EM physics at run time.
 }
 
 PhysicsList::~PhysicsList()

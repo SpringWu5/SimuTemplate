@@ -5,6 +5,7 @@
 #include "globals.hh"
 #include <map>
 #include <string>
+#include <vector>
 
 class EventAction;
 
@@ -33,6 +34,10 @@ class SteppingAction : public G4UserSteppingAction
     G4int scintillationCount;
     G4int wlsCount;  // WLS photon counter
     G4int currentEventID;
+
+    // Per-run photon-statistics accumulators (instance-owned, not global)
+    std::vector<int> fCerenkovCounts;
+    std::vector<int> fScintillationCounts;
 
     // Particle counting map
     std::map<G4String, G4int> particleCount;

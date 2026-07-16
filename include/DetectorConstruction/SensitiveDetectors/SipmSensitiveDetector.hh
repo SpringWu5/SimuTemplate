@@ -27,7 +27,6 @@ public:
 private:
     void LoadSipmPhotonDetectionEfficiency();
 
-    void DumpInfo(G4Step *step, G4TouchableHistory *touchable);
     ROOT::Math::Interpolator* fInterpPDE = nullptr;
     TRandom3* fRandomGen = 0;
 };

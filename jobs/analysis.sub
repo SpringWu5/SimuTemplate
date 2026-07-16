@@ -1,0 +1,28 @@
+# ==============================================================================
+# analysis.sub
+# ------------------------------------------------------------------------------
+# HTCondor submit file for running a Python analysis on SimuTemplate output.
+#
+# Submit with:   condor_submit jobs/analysis.sub
+#
+# >>> If you move/copy this project, update PROJECT_ROOT below. <<<
+# ==============================================================================
+PROJECT_ROOT = /lustre/YOUR_GROUP/YOUR_USERNAME/simu_template
+
+Universe   = vanilla
+Executable = $(PROJECT_ROOT)/jobs/run_analysis_wrapper.sh
+
+# Arguments: <script.py> <input.root> [extra...]
+Arguments  = scripts/inspect_output.py \
+             $(PROJECT_ROOT)/build/output.root \
+             --plot-output artifacts/overview.png
+
+Log        = $(PROJECT_ROOT)/jobs/logs/analysis_$(ClusterId).log
+Output     = $(PROJECT_ROOT)/jobs/logs/analysis_$(ClusterId).out
+Error      = $(PROJECT_ROOT)/jobs/logs/analysis_$(ClusterId).err
+
+request_cpus = 1
+should_transfer_files = NO
+getenv = True
+
+Queue

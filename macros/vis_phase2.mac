@@ -1,0 +1,74 @@
+# ==============================================================================
+# Phase 2.4: Optical Visualization Macro
+# Purpose: Debug optical photon transport, WLS shifting, and SiPM detection
+# ==============================================================================
+
+# Initialize visualization
+/vis/open OGL 600x600-0+0
+
+# Draw volumes in wireframe to see internal structure
+/vis/drawVolume
+/vis/viewer/set/autoRefresh false
+/vis/scene/create
+/vis/scene/add/volume
+/vis/scene/add/trajectories smooth
+/vis/viewer/set/autoRefresh true
+
+# Set camera position for good viewing angle
+/vis/viewer/set/viewpointVector -1 0 0
+/vis/viewer/set/lightsVector -1 0 0
+/vis/viewer/zoom 1.5
+
+# ==============================================================================
+# Trajectory Filtering for Optical Photons
+# ==============================================================================
+
+# Create a trajectory filter to show only optical photons
+/vis/scene/add/trajectories smooth
+/vis/trajectory/create/model
+/vis/trajectory/create/drawTrajectory
+
+# Set color for optical photons (green for visibility)
+/vis/trajectory/model/setLineColor 0 255 0
+
+# Filter to show ONLY optical photons (particle type = 0)
+/vis/trajectory/model/set -visibility G4Optical::OpticalPhoton true
+
+# Hide all other particle trajectories
+/vis/trajectory/model/set -visibility G4Electron false
+/vis/trajectory/model/set -visibility G4Positron false
+/vis/trajectory/model/set -visibility G4MuonMinus false
+/vis/trajectory/model/set -visibility G4MuonPlus false
+/vis/trajectory/model/set -visibility G4Gamma false
+
+# ==============================================================================
+# Particle Gun Settings
+# ==============================================================================
+
+# Set particle gun to electron (will produce scintillation photons)
+/gun/particle e-
+/gun/energy 10 MeV
+
+# Position: Center of a specific voxel (0, 0, 0)
+# This will generate scintillation in the central voxel
+/gun/position 0 0 0 mm
+
+# Direction: Along Z-axis (downward)
+/gun/direction 0 0 -1
+
+# ==============================================================================
+# Run Single Event
+# ==============================================================================
+
+# Run 1 event for visualization
+/run/beamOn 1
+
+# ==============================================================================
+# Post-Run Visualization Commands
+# ==============================================================================
+
+# Auto-rotate for inspection (optional, comment out if not desired)
+/vis/viewer/autoRotate true
+
+# Take a screenshot (optional)
+# /vis/ogl/export optics_check.png

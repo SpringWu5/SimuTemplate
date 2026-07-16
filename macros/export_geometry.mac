@@ -1,0 +1,120 @@
+# ==============================================================================
+# MuonCube Geometry Export Macro
+# Purpose: Export geometry screenshots without interactive GUI
+# Usage: Run this from GUI or modify main() to execute automatically
+# ==============================================================================
+
+# NOTE: This macro still requires X11/OpenGL context, but minimizes GUI time
+# To use: Run ./SLabSimu, then at GUI prompt type: /control/execute export_geometry.mac
+
+# ==============================================================================
+# Step 1: Initialize Visualization
+# ==============================================================================
+/vis/verbose errors
+/vis/open OGL 800x800-0+0
+
+# Disable auto refresh for faster setup
+/vis/viewer/set/autoRefresh false
+
+# Initialize the run
+/run/initialize
+
+# ==============================================================================
+# Step 2: Draw Geometry
+# ==============================================================================
+/vis/drawVolume
+
+# ==============================================================================
+# Step 3: Apply Color and Visibility Settings
+# ==============================================================================
+
+# World volume - transparent
+/vis/geometry/set/visibility World 0
+/vis/geometry/set/colour World 1.0 1.0 1.0 0.0
+
+# Scintillator Voxel - semi-transparent blue
+/vis/geometry/set/visibility Voxel 1
+/vis/geometry/set/colour Voxel 0.3 0.5 1.0 0.25
+/vis/geometry/set/forceSolid Voxel 1
+
+# Plastic Scintillator - light blue
+/vis/geometry/set/visibility Scintillator 1
+/vis/geometry/set/colour Scintillator 0.4 0.6 1.0 0.3
+/vis/geometry/set/forceSolid Scintillator 1
+
+# VoxelWrapper - highly transparent
+/vis/geometry/set/visibility VoxelWrapper 1
+/vis/geometry/set/colour VoxelWrapper 0.9 0.9 0.9 0.05
+/vis/geometry/set/forceSolid VoxelWrapper 1
+
+# Z-Fibers (Vertical) - GREEN
+/vis/geometry/set/visibility FiberCore_Z 1
+/vis/geometry/set/colour FiberCore_Z 0.2 0.8 0.2 0.8
+/vis/geometry/set/forceSolid FiberCore_Z 1
+
+/vis/geometry/set/visibility FiberClad_Z 1
+/vis/geometry/set/colour FiberClad_Z 0.6 0.9 0.6 0.3
+/vis/geometry/set/forceSolid FiberClad_Z 1
+
+# X-Fibers - RED
+/vis/geometry/set/visibility FiberCore_X 1
+/vis/geometry/set/colour FiberCore_X 0.9 0.2 0.2 0.8
+/vis/geometry/set/forceSolid FiberCore_X 1
+
+/vis/geometry/set/visibility FiberClad_X 1
+/vis/geometry/set/colour FiberClad_X 0.95 0.6 0.6 0.3
+/vis/geometry/set/forceSolid FiberClad_X 1
+
+# Y-Fibers - MAGENTA
+/vis/geometry/set/visibility FiberCore_Y 1
+/vis/geometry/set/colour FiberCore_Y 0.8 0.2 0.8 0.8
+/vis/geometry/set/forceSolid FiberCore_Y 1
+
+/vis/geometry/set/visibility FiberClad_Y 1
+/vis/geometry/set/colour FiberClad_Y 0.9 0.6 0.9 0.3
+/vis/geometry/set/forceSolid FiberClad_Y 1
+
+# SiPM Units - Bright YELLOW
+/vis/geometry/set/visibility SiPMUnit 1
+/vis/geometry/set/colour SiPMUnit 1.0 0.9 0.2 0.9
+/vis/geometry/set/forceSolid SiPMUnit 1
+
+# ==============================================================================
+# Step 4: Set View Parameters
+# ==============================================================================
+
+# Isometric view
+/vis/viewer/set/viewpointVector -1 -1 1
+/vis/viewer/set/upVector 0 0 1
+/vis/viewer/set/lightsVector -1 -1 1
+/vis/viewer/set/viewpointThetaPhi 60 45
+
+# Zoom level (adjust as needed: 5.0=standard, 8.0=detailed, 12.0=very close)
+/vis/viewer/zoom 5.0
+
+# Add axes and scale
+/vis/scene/add/axes
+/vis/scene/add/scale
+
+# ==============================================================================
+# Step 5: Enable Auto Refresh and Render
+# ==============================================================================
+/vis/viewer/set/autoRefresh true
+/vis/viewer/flush
+
+# ==============================================================================
+# Step 6: Export Screenshot
+# ==============================================================================
+# Export to PNG file (will be saved in the directory where you run ./SLabSimu)
+/vis/ogl/export artifacts/muoncube_geometry.png
+
+# Log success message
+echo "======================================================================"
+echo "Geometry screenshot exported to: artifacts/muoncube_geometry.png"
+echo "======================================================================"
+
+# ==============================================================================
+# Step 7: Exit GUI (optional - uncomment to auto-exit after export)
+# ==============================================================================
+# Uncomment the line below to automatically exit after export:
+# exit

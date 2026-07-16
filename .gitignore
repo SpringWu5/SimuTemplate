@@ -1,0 +1,25 @@
+# Build artifacts
+/build/
+*.o
+*.so
+*.a
+
+# Simulation / analysis outputs
+*.root
+*.wrl
+/output*
+/artifacts/
+
+# Job logs
+/jobs/logs/*.log
+/jobs/logs/*.out
+/jobs/logs/*.err
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor / OS
+.DS_Store
+*.swp
+.vscode/

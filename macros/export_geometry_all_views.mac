@@ -1,0 +1,122 @@
+# ==============================================================================
+# MuonCube Multi-View Geometry Export Macro
+# Purpose: Export geometry screenshots from multiple viewing angles
+# Output: artifacts/muoncube_view_*.png files
+# ==============================================================================
+
+echo "======================================================================"
+echo "Starting multi-view geometry export..."
+echo "======================================================================"
+
+# Initialize
+/vis/verbose errors
+/vis/open OGL 800x800-0+0
+/vis/viewer/set/autoRefresh false
+/run/initialize
+/vis/drawVolume
+
+# Apply all color settings
+/vis/geometry/set/visibility World 0
+/vis/geometry/set/visibility Voxel 1
+/vis/geometry/set/colour Voxel 0.3 0.5 1.0 0.25
+/vis/geometry/set/forceSolid Voxel 1
+/vis/geometry/set/visibility Scintillator 1
+/vis/geometry/set/colour Scintillator 0.4 0.6 1.0 0.3
+/vis/geometry/set/forceSolid Scintillator 1
+/vis/geometry/set/visibility VoxelWrapper 1
+/vis/geometry/set/colour VoxelWrapper 0.9 0.9 0.9 0.05
+/vis/geometry/set/forceSolid VoxelWrapper 1
+/vis/geometry/set/visibility FiberCore_Z 1
+/vis/geometry/set/colour FiberCore_Z 0.2 0.8 0.2 0.8
+/vis/geometry/set/forceSolid FiberCore_Z 1
+/vis/geometry/set/visibility FiberClad_Z 1
+/vis/geometry/set/colour FiberClad_Z 0.6 0.9 0.6 0.3
+/vis/geometry/set/forceSolid FiberClad_Z 1
+/vis/geometry/set/visibility FiberCore_X 1
+/vis/geometry/set/colour FiberCore_X 0.9 0.2 0.2 0.8
+/vis/geometry/set/forceSolid FiberCore_X 1
+/vis/geometry/set/visibility FiberClad_X 1
+/vis/geometry/set/colour FiberClad_X 0.95 0.6 0.6 0.3
+/vis/geometry/set/forceSolid FiberClad_X 1
+/vis/geometry/set/visibility FiberCore_Y 1
+/vis/geometry/set/colour FiberCore_Y 0.8 0.2 0.8 0.8
+/vis/geometry/set/forceSolid FiberCore_Y 1
+/vis/geometry/set/visibility FiberClad_Y 1
+/vis/geometry/set/colour FiberClad_Y 0.9 0.6 0.9 0.3
+/vis/geometry/set/forceSolid FiberClad_Y 1
+/vis/geometry/set/visibility SiPMUnit 1
+/vis/geometry/set/colour SiPMUnit 1.0 0.9 0.2 0.9
+/vis/geometry/set/forceSolid SiPMUnit 1
+
+/vis/scene/add/axes
+/vis/scene/add/scale
+
+# ==============================================================================
+# View 1: Isometric (Standard 3D view)
+# ==============================================================================
+echo "Exporting View 1: Isometric..."
+/vis/viewer/set/viewpointThetaPhi 60 45
+/vis/viewer/zoom 5.0
+/vis/viewer/set/autoRefresh true
+/vis/viewer/flush
+/vis/ogl/export artifacts/muoncube_view_01_isometric.png
+
+# ==============================================================================
+# View 2: Top View (from +Z)
+# ==============================================================================
+echo "Exporting View 2: Top View..."
+/vis/viewer/set/viewpointThetaPhi 0 0
+/vis/viewer/zoom 5.0
+/vis/viewer/flush
+/vis/ogl/export artifacts/muoncube_view_02_top.png
+
+# ==============================================================================
+# View 3: Side View (from +X)
+# ==============================================================================
+echo "Exporting View 3: Side View..."
+/vis/viewer/set/viewpointThetaPhi 90 0
+/vis/viewer/zoom 5.0
+/vis/viewer/flush
+/vis/ogl/export artifacts/muoncube_view_03_side.png
+
+# ==============================================================================
+# View 4: Front View (from +Y)
+# ==============================================================================
+echo "Exporting View 4: Front View..."
+/vis/viewer/set/viewpointThetaPhi 90 90
+/vis/viewer/zoom 5.0
+/vis/viewer/flush
+/vis/ogl/export artifacts/muoncube_view_04_front.png
+
+# ==============================================================================
+# View 5: Close-up (Detail view)
+# ==============================================================================
+echo "Exporting View 5: Close-up Detail..."
+/vis/viewer/set/viewpointThetaPhi 60 45
+/vis/viewer/zoom 10.0
+/vis/viewer/flush
+/vis/ogl/export artifacts/muoncube_view_05_closeup.png
+
+# ==============================================================================
+# View 6: Zoomed-in (SiPM detail)
+# ==============================================================================
+echo "Exporting View 6: SiPM Detail..."
+/vis/viewer/set/viewpointThetaPhi 45 45
+/vis/viewer/zoom 15.0
+/vis/viewer/flush
+/vis/ogl/export artifacts/muoncube_view_06_sipm_detail.png
+
+echo "======================================================================"
+echo "All views exported successfully!"
+echo "Output directory: artifacts/"
+echo "Files:"
+echo "  - muoncube_view_01_isometric.png"
+echo "  - muoncube_view_02_top.png"
+echo "  - muoncube_view_03_side.png"
+echo "  - muoncube_view_04_front.png"
+echo "  - muoncube_view_05_closeup.png"
+echo "  - muoncube_view_06_sipm_detail.png"
+echo "======================================================================"
+
+# Auto-exit to prevent broken pipe
+exit

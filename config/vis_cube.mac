@@ -1,0 +1,150 @@
+# ==============================================================================
+# MuonCube Geometry Visualization - FIBERS & SiPM ONLY MODE
+# Purpose: Hide scintillator to verify fibers and SiPMs exist
+# Usage: ./SLabSimu (loads this macro automatically in GUI mode)
+# Output: g4_00.wrl (VRML 2.0 format) in build/ directory
+# ==============================================================================
+
+# CRITICAL: Set LOW-POLY rendering BEFORE opening graphics system
+# This reduces cylinder/pipe segments from default (high) to minimum
+/vis/viewer/set/lineSegmentsPerCircle 6
+
+# Use VRML2FILE driver for offline 3D viewing (Robust against SSH lag)
+/vis/open VRML2FILE
+
+# Confirm VRML system is active
+/control/echo "Graphics system: VRML2FILE opened successfully"
+/control/echo "WARNING: Low-poly mode (6 segments) for smaller file size"
+/vis/verbose warnings
+
+# Disable auto-refresh to save performance during setup
+/vis/viewer/set/autoRefresh false
+
+# Initialize the run
+/run/initialize
+
+# Draw the geometry
+/vis/drawVolume
+
+# =============================================================================
+# HIDE SCINTILLATOR - Show only fibers and SiPM
+# =============================================================================
+/control/echo "========================================================================"
+/control/echo "FIBERS ONLY MODE: Scintillator HIDDEN"
+/control/echo "========================================================================"
+/vis/geometry/set/visibility Scintillator 0
+/vis/geometry/set/visibility Voxel 0
+/vis/geometry/set/visibility VoxelWrapper 0
+
+# =============================================================================
+# Fibers - ULTRA BRIGHT COLORS
+# =============================================================================
+# Z-Fiber (Vertical) - ULTRA GREEN
+/vis/geometry/set/visibility FiberCore_Z 1
+/vis/geometry/set/colour FiberCore_Z 0 0.0 1.0 0.0 1.0
+/vis/geometry/set/forceSolid FiberCore_Z 1
+
+/vis/geometry/set/visibility FiberClad_Z 0
+
+# X-Fiber - ULTRA RED
+/vis/geometry/set/visibility FiberCore_X 1
+/vis/geometry/set/colour FiberCore_X 0 1.0 0.0 0.0 1.0
+/vis/geometry/set/forceSolid FiberCore_X 1
+
+/vis/geometry/set/visibility FiberClad_X 0
+
+# Y-Fiber - ULTRA MAGENTA
+/vis/geometry/set/visibility FiberCore_Y 1
+/vis/geometry/set/colour FiberCore_Y 0 1.0 0.0 1.0 1.0
+/vis/geometry/set/forceSolid FiberCore_Y 1
+
+/vis/geometry/set/visibility FiberClad_Y 0
+
+# =============================================================================
+# SiPM - ULTRA YELLOW
+# =============================================================================
+/vis/geometry/set/visibility SiPMUnit 1
+/vis/geometry/set/colour SiPMUnit 0 1.0 1.0 0.0 1.0
+/vis/geometry/set/forceSolid SiPMUnit 1
+
+# =============================================================================
+# Trajectory Visualization - DISABLED to reduce file size
+# =============================================================================
+# Trajectories consume HUGE amount of VRML space (every step point stored)
+# Disable for geometry-only export
+/tracking/storeTrajectory 0
+# /vis/scene/add/trajectories smooth
+# /vis/modeling/trajectories/create/drawByParticleID
+# /vis/scene/endOfEventAction accumulate
+
+# Add scale and axes
+/vis/scene/add/scale
+/vis/scene/add/axes
+
+# =============================================================================
+# Viewpoint Configuration
+# =============================================================================
+# Isometric view
+/vis/viewer/set/viewpointVector -1 -1 1
+/vis/viewer/set/upVector 0 0 1
+/vis/viewer/set/lightsVector -1 -1 1
+/vis/viewer/set/viewpointThetaPhi 60 45
+
+# Re-enable auto refresh
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
+
+# =============================================================================
+# Particle Gun Configuration (Generate 1 event with tracks)
+# =============================================================================
+# Set particle: 500 MeV electron
+/gun/particle e-
+/gun/energy 500 MeV
+
+# Position: center of detector array
+/gun/position 0 0 0 mm
+
+# Direction: along Z axis
+/gun/direction 0 0 1
+
+# =============================================================================
+# Run Event and Export
+# =============================================================================
+/control/echo "======================================================================"
+/control/echo "Running 1 event to generate particle tracks..."
+/control/echo "======================================================================"
+
+# Run 1 event
+/run/beamOn 1
+
+/control/echo "Event completed. Flushing VRML file..."
+/control/echo "Checking current directory for .wrl files:"
+/control/shell ls -la g4*.wrl 2>/dev/null || /control/echo "No .wrl files found yet"
+
+# Force flush to ensure .wrl file is written
+/vis/viewer/flush
+
+# Add a small delay to ensure file write completes
+/control/sleep 1
+
+/control/echo "======================================================================"
+/control/echo "VRML export complete!"
+/control/echo "Expected output file: g4_00.wrl (in build/ directory)"
+/control/echo "======================================================================"
+/control/echo "RENDERING SETTINGS:"
+/control/echo "  Line segments per circle: 6 (ULTRA LOW-POLY)"
+/control/echo "  Trajectories: DISABLED (geometry only)"
+/control/echo "  Expected file size: ~10-50MB (was 1.2GB)"
+/control/echo "======================================================================"
+/control/echo "VERIFICATION CHECK:"
+/control/echo "  Scintillator: HIDDEN (visibility = 0)"
+/control/echo "  You should see:"
+/control/echo "    - 768 colored hexagonal prisms (256 voxels * 3 fibers each)"
+/control/echo "    - 256 yellow blocks (SiPMs)"
+/control/echo "    - IF YOU SEE NOTHING: Fibers/SiPMs do not exist in geometry!"
+/control/echo "======================================================================"
+/control/echo "Auto-exiting GUI session..."
+/control/echo "======================================================================"
+
+# Auto-exit to complete VRML export
+exit

@@ -1,0 +1,44 @@
+# ==============================================================================
+# Phase 2.4: Batch Run Macro for Optical Statistics
+# Purpose: Generate statistics for WLS wavelength spectrum analysis
+# ==============================================================================
+
+# Disable visualization for batch mode
+/vis/disable
+
+# ==============================================================================
+# Output Settings
+# ==============================================================================
+
+# Set output file name (controlled by main program config)
+# This macro just controls the run parameters
+
+# ==============================================================================
+# Particle Gun Settings
+# ==============================================================================
+
+# Use electrons to produce scintillation photons
+/gun/particle e-
+/gun/energy 10 MeV
+
+# Random position within the detector array
+# Using random distribution to sample different voxels
+/gun/position 0 0 0 mm
+
+# Isotropic direction (4π solid angle)
+/gun/direction 0 0 -1
+
+# ==============================================================================
+# Run Parameters
+# ==============================================================================
+
+# Run 1000 events for statistical significance
+/run/beamOn 1000
+
+# ==============================================================================
+# Expected Output
+# ==============================================================================
+# - Total PE (photoelectrons) per event
+# - Wavelength spectrum (expect peak at ~492nm for WLS)
+# - Timing distribution of optical photons
+# - Fiber ID hit map

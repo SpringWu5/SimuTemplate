@@ -1,0 +1,87 @@
+# ==============================================================================
+# Clean VRML Export - No echo commands that could fail
+# ==============================================================================
+
+/vis/open VRML2FILE
+/vis/verbose warnings
+/vis/viewer/set/autoRefresh false
+/run/initialize
+/vis/drawVolume
+
+# World volume
+/vis/geometry/set/visibility World 0
+/vis/geometry/set/colour World 1.0 1.0 1.0 0.0
+
+# VoxelWrapper
+/vis/geometry/set/visibility VoxelWrapper 1
+/vis/geometry/set/colour VoxelWrapper 0.9 0.9 0.9 0.05
+/vis/geometry/set/forceSolid VoxelWrapper 1
+
+# Voxel
+/vis/geometry/set/visibility Voxel 1
+/vis/geometry/set/colour Voxel 0.3 0.5 1.0 0.25
+/vis/geometry/set/forceSolid Voxel 1
+
+# Scintillator
+/vis/geometry/set/visibility Scintillator 1
+/vis/geometry/set/colour Scintillator 0.4 0.6 1.0 0.3
+/vis/geometry/set/forceSolid Scintillator 1
+
+# Z-Fibers
+/vis/geometry/set/visibility FiberCore_Z 1
+/vis/geometry/set/colour FiberCore_Z 0.2 0.8 0.2 0.8
+/vis/geometry/set/forceSolid FiberCore_Z 1
+/vis/geometry/set/visibility FiberClad_Z 1
+/vis/geometry/set/colour FiberClad_Z 0.6 0.9 0.6 0.3
+/vis/geometry/set/forceSolid FiberClad_Z 1
+
+# X-Fibers
+/vis/geometry/set/visibility FiberCore_X 1
+/vis/geometry/set/colour FiberCore_X 0.9 0.2 0.2 0.8
+/vis/geometry/set/forceSolid FiberCore_X 1
+/vis/geometry/set/visibility FiberClad_X 1
+/vis/geometry/set/colour FiberClad_X 0.95 0.6 0.6 0.3
+/vis/geometry/set/forceSolid FiberClad_X 1
+
+# Y-Fibers
+/vis/geometry/set/visibility FiberCore_Y 1
+/vis/geometry/set/colour FiberCore_Y 0.8 0.2 0.8 0.8
+/vis/geometry/set/forceSolid FiberCore_Y 1
+/vis/geometry/set/visibility FiberClad_Y 1
+/vis/geometry/set/colour FiberClad_Y 0.9 0.6 0.9 0.3
+/vis/geometry/set/forceSolid FiberClad_Y 1
+
+# SiPM Units
+/vis/geometry/set/visibility SiPMUnit 1
+/vis/geometry/set/colour SiPMUnit 1.0 0.9 0.2 0.9
+/vis/geometry/set/forceSolid SiPMUnit 1
+
+# Trajectories
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set opticalphoton yellow
+/vis/modeling/trajectories/drawByParticleID-0/set gamma green
+/vis/modeling/trajectories/drawByParticleID-0/set e- blue
+/vis/modeling/trajectories/drawByParticleID-0/set e+ red
+/vis/modeling/trajectories/drawByParticleID-0/set mu- magenta
+/vis/modeling/trajectories/drawByParticleID-0/set mu+ cyan
+
+/vis/scene/add/axes
+/vis/scene/add/scale
+/vis/viewer/set/viewpointThetaPhi 60 45
+/vis/viewer/set/autoRefresh true
+/vis/viewer/flush
+
+# Particle gun
+/gun/particle e-
+/gun/energy 500 MeV
+/gun/position 0 0 0 mm
+/gun/direction 0 0 1
+
+# Run event
+/run/beamOn 1
+
+# Flush to write file
+/vis/viewer/flush
+exit

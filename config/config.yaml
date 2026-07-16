@@ -1,0 +1,91 @@
+# ============================================================================
+# SLabSimu Configuration File
+# ============================================================================
+# Supports both MuonSLab (4-layer slab) and MuonCube (8x8x4 voxel array)
+# ============================================================================
+
+Run:
+  # number of events to simulate. -1 means all particles in the file
+  number_of_events: 10
+
+Particles:
+  particle_file_path: ../data/muons.json
+
+# ============================================================================
+# DETECTOR SELECTION
+# ============================================================================
+# Switch detector type here: "MuonSLab" or "MuonCube"
+Detector:
+  type: "MuonCube"  # Options: "MuonSLab", "MuonCube"
+
+# ============================================================================
+# MuonSLab Configuration (4-layer large scintillator slabs)
+# ============================================================================
+Geometry:
+  SLab:
+    Scintillator:
+      x_length: 20.0 #cm
+      y_length: 20.0 #cm
+      z_length: 2.0 #cm
+
+    ESR:
+      thickness: 0.1 #cm
+
+    Tape:
+      thickness: 0.1 #cm
+
+    SiPM:
+      x_length: 1.0 #cm
+      y_length: 1.0 #cm
+      z_length: 0.1 #cm
+
+    Battery:
+      x_length: 19.4 # cm
+      y_length: 27.0  # cm
+      z_length: 13.3  # cm
+
+    Layout:
+      number_of_slabs: 4
+      slab_offsets: [-9.63, 4.2, 4.2, 4.2]  # cm
+
+# ============================================================================
+# MuonCube Configuration (8x8x4 pixelated voxel array)
+# ============================================================================
+# Phase 1.0: Pure voxel array without WLSF and lead plates
+MuonCube:
+  # Voxel size (cubic voxels) in mm
+  voxel_size: 25.0  # mm (2.5 cm)
+
+  # Array dimensions [X, Y, Z]
+  # Total voxels = 8 * 8 * 4 = 256
+  array_dim: [8, 8, 4]
+
+  # Gap between voxels (for wrapping material) in mm
+  gap: 0.1  # mm
+
+  # Scintillator material name
+  material: "SP101"
+
+  # Scintillation spectrum file (wavelength[nm] intensity pairs)
+  # Optional: if not found, uses default SP101 spectrum
+  spectrum_file: ../config/SP101.txt
+
+  # WLS Fiber spectrum files (Phase 2.0)
+  wls_abs_file: ../config/WLS_Absorption.txt
+  wls_emit_file: ../config/WLS_Emission.txt
+
+# ============================================================================
+# Material Properties
+# ============================================================================
+Property:
+  scintillator:
+    spectrum_file: ../config/EJ200ScintSpectrum.txt
+
+  sipm:
+    pde_file: ../config/SiPM_PDE.txt
+
+  sea_optical_property:
+    path_file: ../config/optical_properties.yaml
+
+  Atmosphere:
+    density: 0.001205 #g / cm3

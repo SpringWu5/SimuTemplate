@@ -1,0 +1,80 @@
+# ============================================================================
+# SimuTemplate Configuration — MuonCube detector variant
+# ============================================================================
+# Identical to config.yaml except Detector.type. All relative data paths
+# resolve from the run CWD (build/), so they are unchanged.
+# ============================================================================
+
+Run:
+  # Smoke-test run: 2 aimed muons (clean voxel-interior hits)
+  number_of_events: 2
+
+Particles:
+  # muons_aim.json: muons aimed squarely inside a voxel (avoids the (0,0)
+  # voxel-corner gap present in muons.json). Use data/muons.json for the
+  # original debug sample.
+  particle_file_path: ../data/muons_aim.json
+
+# ============================================================================
+# DETECTOR SELECTION
+# ============================================================================
+Detector:
+  type: "MuonCube"  # 8x8x4 pixelated voxel array
+
+# ============================================================================
+# MuonSLab Configuration (4-layer large scintillator slabs)
+# ============================================================================
+Geometry:
+  SLab:
+    Scintillator:
+      x_length: 20.0 #cm
+      y_length: 20.0 #cm
+      z_length: 2.0 #cm
+
+    ESR:
+      thickness: 0.1 #cm
+
+    Tape:
+      thickness: 0.1 #cm
+
+    SiPM:
+      x_length: 1.0 #cm
+      y_length: 1.0 #cm
+      z_length: 0.1 #cm
+
+    Battery:
+      x_length: 19.4 # cm
+      y_length: 27.0  # cm
+      z_length: 13.3  # cm
+
+    Layout:
+      number_of_slabs: 4
+      slab_offsets: [-9.63, 4.2, 4.2, 4.2]  # cm
+
+# ============================================================================
+# MuonCube Configuration (8x8x4 pixelated voxel array)
+# ============================================================================
+MuonCube:
+  voxel_size: 25.0  # mm (2.5 cm)
+  array_dim: [8, 8, 4]
+  gap: 0.1  # mm
+  material: "SP101"
+  spectrum_file: ../config/SP101.txt
+  wls_abs_file: ../config/WLS_Absorption.txt
+  wls_emit_file: ../config/WLS_Emission.txt
+
+# ============================================================================
+# Material Properties
+# ============================================================================
+Property:
+  scintillator:
+    spectrum_file: ../config/EJ200ScintSpectrum.txt
+
+  sipm:
+    pde_file: ../config/SiPM_PDE.txt
+
+  sea_optical_property:
+    path_file: ../config/optical_properties.yaml
+
+  Atmosphere:
+    density: 0.001205 #g / cm3

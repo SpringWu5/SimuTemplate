@@ -1,0 +1,35 @@
+# ==============================================================================
+# simulation.sub
+# ------------------------------------------------------------------------------
+# HTCondor submit file for a SimuTemplate production run.
+#
+# Submit with:   condor_submit jobs/simulation.sub
+# Monitor with:  condor_q   (R=running, I=idle, H=held)
+#
+# >>> If you move/copy this project, update PROJECT_ROOT below. <<<
+# ==============================================================================
+PROJECT_ROOT = /lustre/YOUR_GROUP/YOUR_USERNAME/simu_template
+
+Universe   = vanilla
+Executable = $(PROJECT_ROOT)/jobs/run_simulation_wrapper.sh
+
+# Arguments passed to the wrapper: <config.yaml> <output.root> [extra...]
+Arguments  = $(PROJECT_ROOT)/config/config.yaml \
+             $(PROJECT_ROOT)/build/output.root
+
+# Logging (all paths MUST be absolute)
+Log        = $(PROJECT_ROOT)/jobs/logs/sim_$(ClusterId).log
+Output     = $(PROJECT_ROOT)/jobs/logs/sim_$(ClusterId).out
+Error      = $(PROJECT_ROOT)/jobs/logs/sim_$(ClusterId).err
+
+# Resources
+request_cpus = 1
+# request_memory = 4GB
+# request_GPUs   = 1            # uncomment for GPU jobs
+# +SJTU_GPUModel = "A100_80G"
+
+# Shared filesystem: DO NOT transfer files
+should_transfer_files = NO
+getenv = True
+
+Queue

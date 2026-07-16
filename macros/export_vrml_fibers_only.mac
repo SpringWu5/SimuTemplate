@@ -1,0 +1,88 @@
+# ==============================================================================
+# MuonCube VRML Export - Fibers and SiPMs ONLY
+# Purpose: Verify fibers and SiPMs exist by hiding scintillator
+# ==============================================================================
+
+/vis/open VRML2FILE
+/vis/verbose errors
+
+# =============================================================================
+# Reduce rendering precision for smaller file size
+# =============================================================================
+/vis/viewer/set/lineSegmentsPerCircle 12
+
+# Initialize
+/run/initialize
+/vis/drawVolume
+
+# ==============================================================================
+# HIDE SCINTILLATOR - Show only fibers and SiPM
+# ==============================================================================
+/vis/geometry/set/visibility Scintillator 0
+/vis/geometry/set/visibility Voxel 0
+/vis/geometry/set/visibility VoxelWrapper 0
+
+# ==============================================================================
+# Fibers - ULTRA BRIGHT
+# ==============================================================================
+# Z-Fiber (Vertical) - ULTRA GREEN
+/vis/geometry/set/visibility FiberCore_Z 1
+/vis/geometry/set/colour FiberCore_Z 0 0.0 1.0 0.0 1.0
+/vis/geometry/set/forceSolid FiberCore_Z 1
+
+/vis/geometry/set/visibility FiberClad_Z 0
+
+# X-Fiber - ULTRA RED
+/vis/geometry/set/visibility FiberCore_X 1
+/vis/geometry/set/colour FiberCore_X 0 1.0 0.0 0.0 1.0
+/vis/geometry/set/forceSolid FiberCore_X 1
+
+/vis/geometry/set/visibility FiberClad_X 0
+
+# Y-Fiber - ULTRA MAGENTA
+/vis/geometry/set/visibility FiberCore_Y 1
+/vis/geometry/set/colour FiberCore_Y 0 1.0 0.0 1.0 1.0
+/vis/geometry/set/forceSolid FiberCore_Y 1
+
+/vis/geometry/set/visibility FiberClad_Y 0
+
+# ==============================================================================
+# SiPM - ULTRA YELLOW
+# ==============================================================================
+/vis/geometry/set/visibility SiPMUnit 1
+/vis/geometry/set/colour SiPMUnit 0 1.0 1.0 0.0 1.0
+/vis/geometry/set/forceSolid SiPMUnit 1
+
+# ==============================================================================
+# Add helper elements
+# ==============================================================================
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories smooth
+/vis/scene/add/axes
+/vis/scene/add/scale
+
+# Set viewpoint - zoom in to see details
+/vis/viewer/set/viewpointThetaPhi 60 45
+/vis/viewer/set/autoRefresh true
+
+# Run event
+/gun/particle e-
+/gun/energy 500 MeV
+/gun/position 0 0 0 mm
+/gun/direction 0 0 1
+/run/beamOn 1
+
+# Export
+/control/echo "========================================"
+/control/echo "Exporting VRML - FIBERS ONLY MODE"
+/control/echo "========================================"
+/vis/viewer/flush
+/control/sleep 1
+/control/shell ls -lh g4*.wrl 2>/dev/null || /control/echo "No .wrl file"
+/control/echo "========================================"
+/control/echo "Scintillator: HIDDEN"
+/control/echo "You should see:"
+/control/echo "  - 768 colored cylinders (fibers)"
+/control/echo "  - 256 yellow blocks (SiPMs)"
+/control/echo "========================================"
+exit

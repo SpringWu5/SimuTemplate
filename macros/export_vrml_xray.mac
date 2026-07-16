@@ -1,0 +1,86 @@
+# ==============================================================================
+# MuonCube VRML Export - X-Ray Mode (Wireframe Scintillator)
+# Purpose: Make internal fibers and SiPMs visible
+# ==============================================================================
+
+/vis/open VRML2FILE
+/vis/verbose errors
+
+# =============================================================================
+# Reduce rendering precision for smaller file size
+# =============================================================================
+/vis/viewer/set/lineSegmentsPerCircle 12
+
+# Initialize
+/run/initialize
+/vis/drawVolume
+
+# ==============================================================================
+# KEY: Use Wireframe mode for scintillator to see INSIDE
+# ==============================================================================
+/vis/geometry/set/forceWireframe Scintillator true
+/vis/geometry/set/forceWireframe Voxel true
+
+# Make wireframe scintillator very faint
+/vis/geometry/set/colour Scintillator 0 0.3 0.5 1.0 0.15
+/vis/geometry/set/colour Voxel 0 0.3 0.5 1.0 0.15
+
+# ==============================================================================
+# Fibers - BRIGHT COLORS, Solid
+# ==============================================================================
+# Z-Fiber (Vertical) - BRIGHT GREEN
+/vis/geometry/set/visibility FiberCore_Z 1
+/vis/geometry/set/colour FiberCore_Z 0 0.0 1.0 0.0 1.0
+/vis/geometry/set/forceSolid FiberCore_Z 1
+
+/vis/geometry/set/visibility FiberClad_Z 0
+
+# X-Fiber - BRIGHT RED
+/vis/geometry/set/visibility FiberCore_X 1
+/vis/geometry/set/colour FiberCore_X 0 1.0 0.0 0.0 1.0
+/vis/geometry/set/forceSolid FiberCore_X 1
+
+/vis/geometry/set/visibility FiberClad_X 0
+
+# Y-Fiber - BRIGHT MAGENTA
+/vis/geometry/set/visibility FiberCore_Y 1
+/vis/geometry/set/colour FiberCore_Y 0 1.0 0.0 1.0 1.0
+/vis/geometry/set/forceSolid FiberCore_Y 1
+
+/vis/geometry/set/visibility FiberClad_Y 0
+
+# ==============================================================================
+# SiPM - BRIGHT YELLOW
+# ==============================================================================
+/vis/geometry/set/visibility SiPMUnit 1
+/vis/geometry/set/colour SiPMUnit 0 1.0 1.0 0.0 1.0
+/vis/geometry/set/forceSolid SiPMUnit 1
+
+# Add trajectories and axes
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories smooth
+/vis/scene/add/axes
+/vis/scene/add/scale
+
+# Set viewpoint
+/vis/viewer/set/viewpointThetaPhi 60 45
+/vis/viewer/set/autoRefresh true
+
+# Run event
+/gun/particle e-
+/gun/energy 500 MeV
+/gun/position 0 0 0 mm
+/gun/direction 0 0 1
+/run/beamOn 1
+
+# Export
+/control/echo "========================================"
+/control/echo "Exporting VRML in X-Ray mode..."
+/control/echo "========================================"
+/vis/viewer/flush
+/control/shell ls -lh g4*.wrl 2>/dev/null || /control/echo "No .wrl file"
+/control/echo "========================================"
+/control/echo "X-Ray mode: Scintillator is wireframe"
+/control/echo "You should see colored lines (fibers) inside!"
+/control/echo "========================================"
+exit

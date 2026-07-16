@@ -1,0 +1,38 @@
+[
+  {
+    "event_id": 0,
+    "particles_in": [],
+    "particles_out": [],
+    "particles_at_detector": [
+      {
+        "pdgid": 13,
+        "x": 4.365,
+        "y": 4.365,
+        "z": 5.2,
+        "t": 0.0,
+        "px": 0.0,
+        "py": 0.0,
+        "pz": -50000.0
+      }
+    ],
+    "weights": {"volume": 1, "spectrum": 1.0, "interaction": 1, "survival": 1, "total": 1.0}
+  },
+  {
+    "event_id": 1,
+    "particles_in": [],
+    "particles_out": [],
+    "particles_at_detector": [
+      {
+        "pdgid": 13,
+        "x": -3.165,
+        "y": -3.165,
+        "z": 5.2,
+        "t": 0.0,
+        "px": 0.0,
+        "py": 0.0,
+        "pz": -10000.0
+      }
+    ],
+    "weights": {"volume": 1, "spectrum": 1.0, "interaction": 1, "survival": 1, "total": 1.0}
+  }
+]

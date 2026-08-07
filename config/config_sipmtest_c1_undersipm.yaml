@@ -1,0 +1,34 @@
+# ============================================================================
+# SiPM-sizing experiment: single slab + 8 "unit SiPMs" around the perimeter.
+# Variant C1: single 6x6 mm active-area SiPM at each of the 8 sites.
+# ============================================================================
+Run:
+  number_of_events: -1   # use all particles in the scan file
+
+Particles:
+  particle_file_path: ../data/muons_slab_undersipm.json
+
+Detector:
+  type: "sipmtest"
+
+# Experiment parameters (mm unless noted). slab_* default to 20x20x2 cm.
+SiPMTest:
+  config: 1               # 1 = 6x6 single, 2 = 3x3 single, 3 = 2x2 array of 3x3
+  slab_x: 200.0
+  slab_y: 200.0
+  slab_z: 20.0
+  esr_thickness: 1.0
+  active_thickness: 0.5
+  esr_reflectivity: 0.95
+  position_offset: 50.0   # SiPMs at +/- 5 cm along each edge
+
+# Material properties (required by MaterialManager / optical physics)
+Property:
+  scintillator:
+    spectrum_file: ../config/EJ200ScintSpectrum.txt
+  sipm:
+    pde_file: ../config/SiPM_PDE.txt
+  sea_optical_property:
+    path_file: ../config/optical_properties.yaml
+  Atmosphere:
+    density: 0.001205

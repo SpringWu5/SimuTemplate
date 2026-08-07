@@ -1,0 +1,31 @@
+# ============================================================================
+# Small scintillator BLOCK (2x3x3 cm) with a single 6x6 mm SiPM on a 2x3 face.
+# Block-vs-slab SiPM comparison.
+# ============================================================================
+Run:
+  number_of_events: -1
+
+Particles:
+  particle_file_path: ../data/muons_block.json
+
+Detector:
+  type: "blocktest"
+
+BlockTest:
+  bx: 20.0           # mm (2 cm, edge-parallel)
+  by: 30.0           # mm (3 cm, inward)
+  bz: 30.0           # mm (3 cm, vertical; muon crosses this)
+  esr_thickness: 1.0
+  active_thickness: 0.5
+  esr_reflectivity: 0.95
+  active_size: 6.0   # mm (6x6 mm active area)
+
+Property:
+  scintillator:
+    spectrum_file: ../config/EJ200ScintSpectrum.txt
+  sipm:
+    pde_file: ../config/SiPM_PDE.txt
+  sea_optical_property:
+    path_file: ../config/optical_properties.yaml
+  Atmosphere:
+    density: 0.001205

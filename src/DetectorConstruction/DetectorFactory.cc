@@ -11,6 +11,7 @@
 #include "DetectorConstruction/SLabBuilder.hh"
 #include "DetectorConstruction/MuonCubeConstruction.hh"
 #include "DetectorConstruction/SingleSlabSiPMTest.hh"
+#include "DetectorConstruction/BlockSiPMTest.hh"
 
 #include "Util/Logger.hh"
 #include "spdlog/spdlog.h"
@@ -40,6 +41,10 @@ DetectorConstructionBase* DetectorFactory::Create(const G4String& detectorType,
     else if (typeLower == "sipmtest" || typeLower == "slabsipm" || typeLower == "singleSlabsipm") {
         logger->info("Instantiating SingleSlabSiPMTest detector (SiPM-sizing experiment)");
         return new SingleSlabSiPMTest(config_path);
+    }
+    else if (typeLower == "blocktest" || typeLower == "block") {
+        logger->info("Instantiating BlockSiPMTest detector (small block, 1 SiPM)");
+        return new BlockSiPMTest(config_path);
     }
     else {
         logger->error("Unknown detector type: {}", detectorType.c_str());

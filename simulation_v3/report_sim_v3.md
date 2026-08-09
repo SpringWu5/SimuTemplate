@@ -161,3 +161,58 @@ python3 scripts/toys.py                                # 多径迹/fake-hit toy
 
 ![toy G-test vs 数据](figures/comparison/40_toy_gtest.png)
 
+
+---
+
+# 第二部分：stacked Geant4 光学相（研究 F、O0–O4、G；第 10–14 问）
+
+> 已实际运行：新建 `StackedDetector`（上层 4 小闪 + 中央板 8 SiPM + 下层 4 小闪，ESR 光学面参数化），宇宙线触发径迹 O1、垂直验证 O0、表面扫描 O2/O4。O3(specular) 因光子陷获不可行（见下）。
+
+## 15. StackedDetector 与验证
+- 几何：板 20×20×2cm（z∈[-1,1]），8 SiPM(6mm) 在四边 ±5cm（Ch4–11，见头文件映射），4 小闪 2×3×3cm 在 (±6,0,±5)。ESR 壳（reflectivity/sigma_alpha/finish 可配）。
+- 验证（中心垂直缪子）：板沉积 **3.68 MeV / 20 mm**（MIP 正确），8 SiPM 收光。✓
+
+## 16. O0 → O1 分级（研究 Q10：真实径迹展宽本身的作用）
+| 模型 | 表面 | 关键结果 |
+|---|---|---|
+| **O0** 垂直打在 Ch4 上方 | 漫反射 ESR | Ch4 局部份额 **f=0.86**（复现旧"局部主导"基线） |
+| **O1** 真实宇宙线触发径迹 | 漫反射 ESR | 8 SiPM **均匀化到 0.10–0.15**；Ch4=0.148 |
+
+⇒ **仅"真实径迹位置/角度展宽"就把局部份额从 0.86 砍到 ~0.15**（图 `optics/26_staged_O0_O1.png`）——这是 data/MC 差异的最大单一来源，无需改粗糙度。
+
+## 17. T02 / T13 光分享 vs 数据（漫反射 ESR, O1）
+| 拓扑 | n | f11(MC) | f11(数据) | f10(MC) | f10(数据) |
+|---|---|---|---|---|---|
+| T02(Ch0&Ch2,+x) | 139 | 0.159 | 0.252 | 0.044 | 0.083 |
+| T13(Ch1&Ch3,-x) | 124 | 0.045 | 0.083 | 0.159 | 0.229 |
+
+- **不对称模式复现**：T02 中 f11>f10、T13 中 f10>f11（X_front 符号正确，图 `optics/O1_xfront.png`）。
+- **绝对值系统性偏低 ~1.6×**（f11: 0.159 vs 0.252）。
+
+## 18. 表面扫描结论（Q11–12）
+- **O2 粗糙度**（σ_α=0/5/10/20°，frontpainted）：fraction **完全不变**（f11=0.159）→ 该 ESR 模型对 micro-roughness 不敏感（frontpainted 已等效漫反射）。
+- **O4 反射率**（R=0.95→0.90）：fraction 不变（归一化使然，符合预期；只影响绝对 PE）。
+- **O3 specular(polished)**：光子镜面陷获、每事件追踪 13 万光子近不终止 → 超出 HTCondor 资源被杀；且纯镜面 ESR 本就不物理。
+⇒ **漫反射 ESR(O1) 已是现实模型**；data f11(0.252) vs MC(0.159) 的残余差 **不能**由粗糙度/漫反射解释，更可能来自：SiPM/径迹的精确几何位置、或数据 f_i 定义/选择——需后续细化。
+
+## 19. Panel M=8 vs 阈值（研究 G / Q13–14，O1 真实径迹）
+P(panel M=8) 随 SiPM 阈值（原始光子，PE≈×0.40）：
+| 阈值(ph) | 0.5 | 1 | 2 | 3 | 5 |
+|---|---|---|---|---|---|
+| P(M=8) | **0.88** | **0.59** | 0.32 | 0.20 | 0.11 |
+
+⇒ **真实穿板缪子在低阈值下极易形成 M=8**（thr≈1 ph≈0.4 PE 时 59%、≈2.5 ph≈1 PE 时 32%）。**M=8 不需要极端 common-mode 假设**；只要阈值在 ~1 PE 量级，漫反射 ESR + 真实径迹的自然光扩散即可大量产生 M=8（图 `optics/O1_multiplicity.png`、`O1_M8_vs_threshold.png`）。
+
+## 20. 第 10–14 问回答（光学相）
+| # | 结论 | 可信度 |
+|---|---|---|
+| 10 | 真实径迹展宽本身把局部份额 0.86→0.15（最大单一因素） | 高 |
+| 11 | 残余 data/MC f11 差(0.159 vs 0.252) **不能**由 rough/diffuse 解释（frontpainted 已漫反射、粗糙度无效） | 中 |
+| 12 | 最接近实验的表面 = 现实漫反射 ESR(O1)；specular 不可行 | 中 |
+| 13 | 低阈值(~1 PE)下真实缪子即可大量 M=8 | 高 |
+| 14 | 实验 M=8 **不需**额外 common-mode（低阈值即可），但绝对 f11 偏高仍待几何/定义层面解释 | 中 |
+
+## 21. 光学相产出
+- 探测器：`StackedDetector`（键 `stacked`）、`config_stacked*.yaml`、`muons_stacked*.json`
+- 图：`figures/optics/{26_staged_O0_O1, O0/O1_fractions_all, O1_fractions_T02_T13, O1_xfront, O1_multiplicity, O1_M8_vs_threshold}.png`
+- 表：`tables/{stacked_O0/O1_lightshare, optical_models_summary}.csv`

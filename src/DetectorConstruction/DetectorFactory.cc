@@ -12,6 +12,7 @@
 #include "DetectorConstruction/MuonCubeConstruction.hh"
 #include "DetectorConstruction/SingleSlabSiPMTest.hh"
 #include "DetectorConstruction/BlockSiPMTest.hh"
+#include "DetectorConstruction/StackedDetector.hh"
 
 #include "Util/Logger.hh"
 #include "spdlog/spdlog.h"
@@ -45,6 +46,10 @@ DetectorConstructionBase* DetectorFactory::Create(const G4String& detectorType,
     else if (typeLower == "blocktest" || typeLower == "block") {
         logger->info("Instantiating BlockSiPMTest detector (small block, 1 SiPM)");
         return new BlockSiPMTest(config_path);
+    }
+    else if (typeLower == "stacked") {
+        logger->info("Instantiating StackedDetector (full stacked optical geometry)");
+        return new StackedDetector(config_path);
     }
     else {
         logger->error("Unknown detector type: {}", detectorType.c_str());

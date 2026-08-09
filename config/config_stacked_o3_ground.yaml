@@ -1,0 +1,38 @@
+# ============================================================================
+# Stacked detector (phase-3 optical study): 4 small scints + slab(8 SiPM).
+# Optical surface params are scanned here for O2/O3/O4.
+# ============================================================================
+Run:
+  number_of_events: -1
+
+Particles:
+  particle_file_path: ../data/muons_stacked.json
+
+Detector:
+  type: "stacked"
+
+Stacked:
+  layer_sep: 10.0          # cm, upper/lower layer centre separation
+  same_layer_gap: 10.0     # cm, between facing 3x3 faces in a layer
+  slab_hx: 10.0            # cm half-extents (20x20x2)
+  slab_hy: 10.0
+  slab_hz: 1.0
+  block_hx: 1.0            # cm half-extents (2x3x3)
+  block_hy: 1.5
+  block_hz: 1.5
+  sipm_active: 6.0         # mm, slab SiPM active side
+  esr_thick: 0.1           # cm
+  # ---- optical model (O0/O1 baseline; O2/O4 scans override these) ----
+  esr_reflectivity: 0.95
+  esr_sigma_alpha_deg: 0.0
+  esr_finish: ground
+
+Property:
+  scintillator:
+    spectrum_file: ../config/EJ200ScintSpectrum.txt
+  sipm:
+    pde_file: ../config/SiPM_PDE.txt
+  sea_optical_property:
+    path_file: ../config/optical_properties.yaml
+  Atmosphere:
+    density: 0.001205

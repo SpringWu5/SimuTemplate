@@ -1,0 +1,53 @@
+# ============================================================================
+# simulation_v3/configs/geometry.yaml
+# ----------------------------------------------------------------------------
+# Coordinate system (all units cm unless noted):
+#   x : horizontal, +x = "right". Slab edges along x and y.
+#   y : horizontal, +y = "back"  (-y = "front").
+#   z : vertical,   +z = up. Cosmic muons travel toward -z.
+#
+# Small scints (each 2 x 3 x 3 cm): height = z = 3 cm; base = x(2 cm) x y(3 cm).
+#   The 2-cm edge (x) is aligned with the slab edge (x), as specified.
+#   The two blocks in a layer face each other with their 3x3 (y-z) side faces,
+#   separated by same_layer_gap.
+#
+# Channel map (matches experiment):
+#   Ch0 = upper right   (+x, +z)    Ch1 = upper left   (-x, +z)
+#   Ch2 = lower right   (+x, -z)    Ch3 = lower left   (-x, -z)
+# Slab SiPMs (front/back/left/right faces), used in the optical phase:
+#   right(+x) face: Ch4,Ch5   back(+y): Ch6,Ch7   left(-x): Ch8,Ch9   front(-y): Ch10,Ch11
+#   Ch11 (front, +x side) ~ under Ch0-Ch2 path; Ch10 (front, -x side) ~ under Ch1-Ch3 path.
+# ============================================================================
+
+slab:
+  hx: 10.0   # half x (20 cm)
+  hy: 10.0   # half y (20 cm)
+  hz: 1.0    # half z (2 cm)  -> centered at z=0
+
+block:               # half-extents of a small scint (2 x 3 x 3 cm)
+  hx: 1.0    # x half (2 cm / 2)
+  hy: 1.5    # y half (3 cm / 2)
+  hz: 1.5    # z half (3 cm / 2)
+
+same_layer_gap: 10.0   # cm, net gap between the two facing 3x3 faces in a layer
+
+# Layer separation = vertical distance between upper and lower layer CENTRES.
+# Prompt: "about 10 cm" but uncertain -> scanned.
+layer_sep_values: [8.0, 9.0, 10.0, 11.0, 12.0]
+
+# Cosmic angular model: dN/dOmega ∝ cos^n(theta), theta = zenith angle.
+n_values: [1.5, 2.0, 2.5, 3.0]
+
+generation:
+  z_plane: 60.0      # cm, generation plane height (well above detector)
+  half_width: 60.0   # cm, plane spans x,y in [-60,60] (1.2 m x 1.2 m)
+
+n_muons: 3000000     # generated muons per (n) point
+
+# ---------------------------------------------------------------------------
+# Derived block centre x: facing 3x3 (y-z) faces separated by same_layer_gap.
+#   right block left-face at +gap/2, spans x in [+gap/2, +gap/2 + 2*hx] -> centre +gap/2 + hx
+#   left  block right-face at -gap/2 -> centre -gap/2 - hx
+# With gap=10, hx=1 -> centres at +/-6 cm.
+# Upper layer centre z = +layer_sep/2 ; lower layer centre z = -layer_sep/2.
+# ---------------------------------------------------------------------------

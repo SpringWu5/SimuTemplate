@@ -1,0 +1,1342 @@
+[
+ {
+  "n": 1.5,
+  "L": 8.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 201,
+  "M_counts": {
+   "M0": 2993994,
+   "M1": 5805,
+   "M2": 201,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 102,
+   "13": 98,
+   "03": 1,
+   "12": 0
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 102,
+   "13": 98,
+   "03": 1,
+   "12": 0
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 102,
+    "n_exc": 102
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 98,
+    "n_exc": 98
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 1,
+    "n_exc": 1
+   },
+   "12": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   }
+  }
+ },
+ {
+  "n": 1.5,
+  "L": 9.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 155,
+  "M_counts": {
+   "M0": 2994004,
+   "M1": 5841,
+   "M2": 155,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 71,
+   "13": 72,
+   "03": 7,
+   "12": 5
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 71,
+   "13": 72,
+   "03": 7,
+   "12": 5
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 71,
+    "n_exc": 71
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 72,
+    "n_exc": 72
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 7,
+    "n_exc": 7
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 5,
+    "n_exc": 5
+   }
+  }
+ },
+ {
+  "n": 1.5,
+  "L": 10.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 131,
+  "M_counts": {
+   "M0": 2993898,
+   "M1": 5971,
+   "M2": 131,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 51,
+   "13": 66,
+   "03": 6,
+   "12": 8
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 51,
+   "13": 66,
+   "03": 6,
+   "12": 8
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 51,
+    "n_exc": 51
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 66,
+    "n_exc": 66
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 6,
+    "n_exc": 6
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 8,
+    "n_exc": 8
+   }
+  }
+ },
+ {
+  "n": 1.5,
+  "L": 11.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 88,
+  "M_counts": {
+   "M0": 2993792,
+   "M1": 6120,
+   "M2": 88,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 30,
+   "13": 43,
+   "03": 6,
+   "12": 9
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 30,
+   "13": 43,
+   "03": 6,
+   "12": 9
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 30,
+    "n_exc": 30
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 43,
+    "n_exc": 43
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 6,
+    "n_exc": 6
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 9,
+    "n_exc": 9
+   }
+  }
+ },
+ {
+  "n": 1.5,
+  "L": 12.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 85,
+  "M_counts": {
+   "M0": 2993780,
+   "M1": 6135,
+   "M2": 85,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 27,
+   "13": 34,
+   "03": 13,
+   "12": 11
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 27,
+   "13": 34,
+   "03": 13,
+   "12": 11
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 27,
+    "n_exc": 27
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 34,
+    "n_exc": 34
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 13,
+    "n_exc": 13
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 11,
+    "n_exc": 11
+   }
+  }
+ },
+ {
+  "n": 2.0,
+  "L": 8.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 202,
+  "M_counts": {
+   "M0": 2993440,
+   "M1": 6358,
+   "M2": 202,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 103,
+   "13": 98,
+   "03": 0,
+   "12": 1
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 103,
+   "13": 98,
+   "03": 0,
+   "12": 1
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 103,
+    "n_exc": 103
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 98,
+    "n_exc": 98
+   },
+   "03": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 1,
+    "n_exc": 1
+   }
+  }
+ },
+ {
+  "n": 2.0,
+  "L": 9.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 183,
+  "M_counts": {
+   "M0": 2993273,
+   "M1": 6544,
+   "M2": 183,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 90,
+   "13": 89,
+   "03": 1,
+   "12": 3
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 90,
+   "13": 89,
+   "03": 1,
+   "12": 3
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 90,
+    "n_exc": 90
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 89,
+    "n_exc": 89
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 1,
+    "n_exc": 1
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 3,
+    "n_exc": 3
+   }
+  }
+ },
+ {
+  "n": 2.0,
+  "L": 10.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 154,
+  "M_counts": {
+   "M0": 2993472,
+   "M1": 6374,
+   "M2": 154,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 66,
+   "13": 79,
+   "03": 4,
+   "12": 5
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 66,
+   "13": 79,
+   "03": 4,
+   "12": 5
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 66,
+    "n_exc": 66
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 79,
+    "n_exc": 79
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 4,
+    "n_exc": 4
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 5,
+    "n_exc": 5
+   }
+  }
+ },
+ {
+  "n": 2.0,
+  "L": 11.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 132,
+  "M_counts": {
+   "M0": 2993289,
+   "M1": 6579,
+   "M2": 132,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 56,
+   "13": 48,
+   "03": 12,
+   "12": 16
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 56,
+   "13": 48,
+   "03": 12,
+   "12": 16
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 56,
+    "n_exc": 56
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 48,
+    "n_exc": 48
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 12,
+    "n_exc": 12
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 16,
+    "n_exc": 16
+   }
+  }
+ },
+ {
+  "n": 2.0,
+  "L": 12.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 106,
+  "M_counts": {
+   "M0": 2993436,
+   "M1": 6458,
+   "M2": 106,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 35,
+   "13": 47,
+   "03": 8,
+   "12": 16
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 35,
+   "13": 47,
+   "03": 8,
+   "12": 16
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 35,
+    "n_exc": 35
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 47,
+    "n_exc": 47
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 8,
+    "n_exc": 8
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 16,
+    "n_exc": 16
+   }
+  }
+ },
+ {
+  "n": 2.5,
+  "L": 8.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 295,
+  "M_counts": {
+   "M0": 2993077,
+   "M1": 6628,
+   "M2": 295,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 156,
+   "13": 138,
+   "03": 1,
+   "12": 0
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 156,
+   "13": 138,
+   "03": 1,
+   "12": 0
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 156,
+    "n_exc": 156
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 138,
+    "n_exc": 138
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 1,
+    "n_exc": 1
+   },
+   "12": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   }
+  }
+ },
+ {
+  "n": 2.5,
+  "L": 9.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 187,
+  "M_counts": {
+   "M0": 2992922,
+   "M1": 6891,
+   "M2": 187,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 97,
+   "13": 87,
+   "03": 0,
+   "12": 3
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 97,
+   "13": 87,
+   "03": 0,
+   "12": 3
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 97,
+    "n_exc": 97
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 87,
+    "n_exc": 87
+   },
+   "03": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 3,
+    "n_exc": 3
+   }
+  }
+ },
+ {
+  "n": 2.5,
+  "L": 10.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 139,
+  "M_counts": {
+   "M0": 2993010,
+   "M1": 6851,
+   "M2": 139,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 63,
+   "13": 68,
+   "03": 5,
+   "12": 3
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 63,
+   "13": 68,
+   "03": 5,
+   "12": 3
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 63,
+    "n_exc": 63
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 68,
+    "n_exc": 68
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 5,
+    "n_exc": 5
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 3,
+    "n_exc": 3
+   }
+  }
+ },
+ {
+  "n": 2.5,
+  "L": 11.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 160,
+  "M_counts": {
+   "M0": 2992802,
+   "M1": 7038,
+   "M2": 160,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 75,
+   "13": 58,
+   "03": 12,
+   "12": 15
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 75,
+   "13": 58,
+   "03": 12,
+   "12": 15
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 75,
+    "n_exc": 75
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 58,
+    "n_exc": 58
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 12,
+    "n_exc": 12
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 15,
+    "n_exc": 15
+   }
+  }
+ },
+ {
+  "n": 2.5,
+  "L": 12.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 137,
+  "M_counts": {
+   "M0": 2993011,
+   "M1": 6852,
+   "M2": 137,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 52,
+   "13": 48,
+   "03": 17,
+   "12": 20
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 52,
+   "13": 48,
+   "03": 17,
+   "12": 20
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 52,
+    "n_exc": 52
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 48,
+    "n_exc": 48
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 17,
+    "n_exc": 17
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 20,
+    "n_exc": 20
+   }
+  }
+ },
+ {
+  "n": 3.0,
+  "L": 8.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 272,
+  "M_counts": {
+   "M0": 2992891,
+   "M1": 6837,
+   "M2": 272,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 130,
+   "13": 140,
+   "03": 0,
+   "12": 2
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 130,
+   "13": 140,
+   "03": 0,
+   "12": 2
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 130,
+    "n_exc": 130
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 140,
+    "n_exc": 140
+   },
+   "03": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 2,
+    "n_exc": 2
+   }
+  }
+ },
+ {
+  "n": 3.0,
+  "L": 9.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 218,
+  "M_counts": {
+   "M0": 2992712,
+   "M1": 7070,
+   "M2": 218,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 104,
+   "13": 108,
+   "03": 4,
+   "12": 2
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 104,
+   "13": 108,
+   "03": 4,
+   "12": 2
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 104,
+    "n_exc": 104
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 108,
+    "n_exc": 108
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 4,
+    "n_exc": 4
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 2,
+    "n_exc": 2
+   }
+  }
+ },
+ {
+  "n": 3.0,
+  "L": 10.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 198,
+  "M_counts": {
+   "M0": 2992589,
+   "M1": 7213,
+   "M2": 198,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 95,
+   "13": 89,
+   "03": 6,
+   "12": 8
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 95,
+   "13": 89,
+   "03": 6,
+   "12": 8
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 95,
+    "n_exc": 95
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 89,
+    "n_exc": 89
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 6,
+    "n_exc": 6
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 8,
+    "n_exc": 8
+   }
+  }
+ },
+ {
+  "n": 3.0,
+  "L": 11.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 192,
+  "M_counts": {
+   "M0": 2992664,
+   "M1": 7144,
+   "M2": 192,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 86,
+   "13": 83,
+   "03": 10,
+   "12": 13
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 86,
+   "13": 83,
+   "03": 10,
+   "12": 13
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 86,
+    "n_exc": 86
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 83,
+    "n_exc": 83
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 10,
+    "n_exc": 10
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 13,
+    "n_exc": 13
+   }
+  }
+ },
+ {
+  "n": 3.0,
+  "L": 12.0,
+  "ngen": 3000000,
+  "n_trigger_ge2": 120,
+  "M_counts": {
+   "M0": 2992699,
+   "M1": 7181,
+   "M2": 120,
+   "M3": 0,
+   "M4": 0
+  },
+  "topology_M2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 57,
+   "13": 38,
+   "03": 10,
+   "12": 15
+  },
+  "topology_inclusive_ge2_counts": {
+   "01": 0,
+   "23": 0,
+   "02": 57,
+   "13": 38,
+   "03": 10,
+   "12": 15
+  },
+  "slab_cross": {
+   "01": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "23": {
+    "P_slab_inc": NaN,
+    "P_slab_exc": NaN,
+    "n_inc": 0,
+    "n_exc": 0
+   },
+   "02": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 57,
+    "n_exc": 57
+   },
+   "13": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 38,
+    "n_exc": 38
+   },
+   "03": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 10,
+    "n_exc": 10
+   },
+   "12": {
+    "P_slab_inc": 1.0,
+    "P_slab_exc": 1.0,
+    "n_inc": 15,
+    "n_exc": 15
+   }
+  }
+ }
+]

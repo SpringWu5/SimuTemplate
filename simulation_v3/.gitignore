@@ -1,0 +1,3 @@
+# large regenerable record samples (200k muons each); keep triggered_*.npz + summary
+processed/records_n*_L10.npz
+__pycache__/

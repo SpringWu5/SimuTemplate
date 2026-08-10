@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>修正宇宙线接受度后的触发拓扑模拟（STEP 1-4）</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">修正宇宙线接受度后的触发拓扑模拟（STEP 1-4）</h1>
+</header>
+<h1 id="修正宇宙线接受度后的触发拓扑模拟simulation_v4step-14">修正宇宙线接受度后的触发拓扑模拟（simulation_v4，STEP 1–4）</h1>
+<blockquote>
+<p>本阶段以 <code>sampling_audit_report.md</code> 为基线，建立<strong>重要性采样（IS）生成器</strong>并验证，把 same-layer 接受度算到 ESS≥1000，完成角分布/几何系统学与六拓扑。<strong>STEP 5+（运动学、stacked 光学、toy）为后续。</strong></p>
+</blockquote>
+<h2 id="重要性采样设计importance_samplingis_engine.py">1. 重要性采样设计（<code>importance_sampling/is_engine.py</code>）</h2>
+<p><strong>目标 PDF</strong>（水平面 flux，约定 B）：p(x0,y0,θ,φ) = (1/A)·(n+1)cosⁿθ·(1/2π)；约定 A 多一个 cosθ ⇒ p_θ=(n+2)cosⁿ⁺¹θ。 <strong>Proposal</strong>： - θ：q_θ = 0.7·(n+1)cosⁿθ + 0.3·Unif[70°,89°]（增强大角度尾）； - φ：q_φ = 0.7/(2π) + 0.3·[½WNorm(φ;0,20°)+½WNorm(φ;π,20°)]（增强 ±x 方向）； - 位置：q_pos = 0.4·Unif[-300,300]² + 0.6·(x0 侧带[20,45]∪[-45,-20]，y0~Gauss(0,5cm))（集中在 same-layer 起点）。 <strong>权重</strong>：w = w_θ·w_φ·w_pos = (p_θ/q_θ)·(p_φ/q_φ)·(p_pos/q_pos)。 <strong>ESS</strong> = (Σw)²/Σw²。生成面 z=10cm，HW=300cm（捕获 θ≤88°）。</p>
+<h2 id="三方法验证step-12figures02_validation.pngtablesv4_validation.csv">2. 三方法验证（STEP 1–2，<code>figures/02_validation.png</code>、<code>tables/v4_validation.csv</code>）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>01</th>
+<th>23</th>
+<th>02</th>
+<th>13</th>
+<th>03</th>
+<th>12</th>
+<th>same-layer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A 无偏(weights=1)</td>
+<td>0</td>
+<td>.125</td>
+<td>.375</td>
+<td>.500</td>
+<td>0</td>
+<td>0</td>
+<td>.125(ESS1,仅1事)</td>
+</tr>
+<tr class="even">
+<td>B IS</td>
+<td>.032</td>
+<td>.020</td>
+<td>.343</td>
+<td>.213</td>
+<td>.237</td>
+<td>.155</td>
+<td>.052(ESS57)</td>
+</tr>
+<tr class="odd">
+<td>C 备选proposal</td>
+<td>.038</td>
+<td>.039</td>
+<td>.294</td>
+<td>.233</td>
+<td>.218</td>
+<td>.179</td>
+<td>.077(ESS62)</td>
+</tr>
+</tbody>
+</table>
+<p>跨层拓扑（02/13/03/12）三方法<strong>一致</strong>；same-layer B≈C（A 无偏统计不足以测 same-layer，仅作跨层基准）。<strong>生成器验证通过。</strong></p>
+<h2 id="收敛-same-layerstep-2b20-seeds-1e7">3. 收敛 same-layer（STEP 2b，20 seeds × 1e7）</h2>
+<p><strong>P(same-layer | single-μ triggered M2) = 6.65% ± 0.19%（ESS=1172, relerr 2.9%, raw 53122 事件）</strong>。 数据 same-layer = 52%。<strong>比值 ≈ 7.8×</strong>。same-layer 径迹 θ 集中在 77–86°（与解析 θ≥76° 一致）。</p>
+<h2 id="角分布系统学step-3atablesv4_systematics.csv">4. 角分布系统学（STEP 3a，<code>tables/v4_systematics.csv</code>）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>n</th>
+<th>conv B (cosⁿ)</th>
+<th>conv A (cosⁿ⁺¹)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.5</td>
+<td><strong>18.3%</strong></td>
+<td>3.2%</td>
+</tr>
+<tr class="even">
+<td>2.0</td>
+<td>7.9%</td>
+<td>1.4%</td>
+</tr>
+<tr class="odd">
+<td>2.5</td>
+<td>3.4%</td>
+<td>0.6%</td>
+</tr>
+<tr class="even">
+<td>3.0</td>
+<td>1.5%</td>
+<td>0.3%</td>
+</tr>
+</tbody>
+</table>
+<p>角分布是最强系统学（n=1.5→18%, n=3→1.5%）。约定 A 比 B 系统性低 ~2×。</p>
+<h2 id="几何系统学step-3bn2convb">5. 几何系统学（STEP 3b，n=2,convB）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>gap(cm)</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>same-layer</td>
+<td>11.2%</td>
+<td>9.2%</td>
+<td>8.0%</td>
+<td>7.3%</td>
+<td>3.8%</td>
+</tr>
+<tr class="even">
+<td>Lsep(cm)</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>same-layer</td>
+<td>3.3%</td>
+<td>5.9%</td>
+<td>8.0%</td>
+<td>8.5%</td>
+<td>10.9%</td>
+</tr>
+<tr class="even">
+<td>对齐偏移</td>
+<td>xoff±2cm: 6–8%</td>
+<td>yoff±2cm: 7–8%</td>
+<td>（稳定，&lt;±2cm）</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>系统学包络</strong>：n=2 下，gap∈[8,12]∪Lsep∈[8,12] → same-layer ∈ [3.3%, 11.2%]；含 n=1.5 软谱上界 ~18%。<strong>对齐 ±2cm 影响 &lt;±2%。</strong></p>
+<h2 id="六拓扑step-4n2convbgap10tablesv4_topology.csv">6. 六拓扑（STEP 4，n=2,convB,gap=10,<code>tables/v4_topology.csv</code>）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>拓扑</th>
+<th>MC</th>
+<th>±stat</th>
+<th>data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01(U01)</td>
+<td>3.1%</td>
+<td>0.2%</td>
+<td>30.6%</td>
+</tr>
+<tr class="even">
+<td>23(L23)</td>
+<td>1.6%</td>
+<td>0.2%</td>
+<td>22.4%</td>
+</tr>
+<tr class="odd">
+<td>02</td>
+<td>34.8%</td>
+<td>—</td>
+<td>20.4%</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>33.5%</td>
+<td>—</td>
+<td>9.8%</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td>14.6%</td>
+<td>—</td>
+<td>9.8%</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>12.4%</td>
+<td>—</td>
+<td>7.1%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>MC 02≈13（左右对称），数据 02/13≈2.1</strong>（明显不对称）→ 真实装置存在左右效率/对齐不对称，对称 MC 无法复现。</li>
+<li>same-layer（01+23）MC ~5% vs 数据 53%。</li>
+</ul>
+<h2 id="核心问题回答本阶段">7. 核心问题回答（本阶段）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>问题</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>收敛 single-μ same-layer</td>
+<td><strong>6.65% ± 0.19%（ESS 1172）</strong></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>统计误差</td>
+<td><strong>2.9%</strong>（ESS≥1000 达标）</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>系统学最大/最小</td>
+<td>min ~1.5%(n=3)；max ~11%(n=2,小gap大Lsep)；含 n=1.5→18%</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>能否到 52%？</td>
+<td><strong>否</strong>。最乐观(n=1.5+几何)~18%，仍 3× 低于 52%；现实(n=2)≤~11%，5× 低于</td>
+</tr>
+</tbody>
+</table>
+<h2 id="系统学预算分开报告">8. 系统学预算（分开报告）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>来源</th>
+<th>same-layer 影响</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MC 统计</td>
+<td>±0.19%(rel 2.9%)</td>
+</tr>
+<tr class="even">
+<td>角分布 n=1.5→3</td>
+<td>1.5%–18%（<strong>主导</strong>）</td>
+</tr>
+<tr class="odd">
+<td>flux 约定 A/B</td>
+<td>×~2</td>
+</tr>
+<tr class="even">
+<td>gap 8→12</td>
+<td>3.8%–11%</td>
+</tr>
+<tr class="odd">
+<td>Lsep 8→12</td>
+<td>3.3%–11%</td>
+</tr>
+<tr class="even">
+<td>对齐 ±2cm</td>
+<td>&lt;±2%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="待续step-514">9. 待续（STEP 5–14）</h2>
+<ol start="5" type="1">
+<li>same-layer 运动学 + 穿板概率；6. cross-layer path/Edep；7. 重生无截断 O1 光学样本；8. T02/T13/T03/T12 光分享；9. same-layer 光学；10. 比数据 7 个 same-M8；11. B2/B3 兼容性；12–13. multi-track/correlated/fake toy；14. 综合 data/MC mixture。</li>
+</ol>
+<h2 id="产出">产出</h2>
+<ul>
+<li>脚本：<code>scripts/run_v4.py</code>、<code>importance_sampling/is_engine.py</code></li>
+<li>图：<code>figures/{01_is_diagnostics,02_validation,03_systematics_topology}.png</code></li>
+<li>表：<code>tables/v4_{validation,same_layer,systematics,topology}.csv</code></li>
+</ul>
+</body>
+</html>

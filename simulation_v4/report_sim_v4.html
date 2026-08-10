@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>修正宇宙线接受度后的触发拓扑模拟（STEP 1-4）</title>
+  <title>修正宇宙线接受度后的触发拓扑模拟（STEP 1-14）</title>
   <style>
     html {
       line-height: 1.5;
@@ -151,7 +151,7 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">修正宇宙线接受度后的触发拓扑模拟（STEP 1-4）</h1>
+<h1 class="title">修正宇宙线接受度后的触发拓扑模拟（STEP 1-14）</h1>
 </header>
 <h1 id="修正宇宙线接受度后的触发拓扑模拟simulation_v4step-14">修正宇宙线接受度后的触发拓扑模拟（simulation_v4，STEP 1–4）</h1>
 <blockquote>
@@ -419,6 +419,295 @@
 <li>脚本：<code>scripts/run_v4.py</code>、<code>importance_sampling/is_engine.py</code></li>
 <li>图：<code>figures/{01_is_diagnostics,02_validation,03_systematics_topology}.png</code></li>
 <li>表：<code>tables/v4_{validation,same_layer,systematics,topology}.csv</code></li>
+</ul>
+<hr />
+<h1 id="step-514运动学光学toy-与-mixture">STEP 5–14：运动学、光学、toy 与 mixture</h1>
+<h2 id="step-5same-layer-运动学与穿板figures04_samelayer_kinematics.png">10. STEP 5：same-layer 运动学与穿板（<code>figures/04_samelayer_kinematics.png</code>）</h2>
+<ul>
+<li><strong>P(slab crossed | U01) = 0.000</strong></li>
+<li><strong>P(slab crossed | L23) = 0.000</strong></li>
+<li>same-layer θ集中在 77–86°（水平径迹）；phi 集中在 0°/180°（±x 方向）。</li>
+<li><strong>结论</strong>：同层水平缪子<strong>完全不穿板</strong>（板 z∈[-1,1]，同层径迹 z≈±5）⇒ 无法产生 panel 信号。</li>
+</ul>
+<p>⇒ <strong>数据中 7 个 same-layer M8（均有 panel M8 信号）不可能是单高角度缪子</strong>（Q5,7）。</p>
+<h2 id="step-6cross-layer-pathedep-landaufigures05-06tablesv4_cross_edep.csv">11. STEP 6：cross-layer path/Edep + Landau（<code>figures/05-06</code>、<code>tables/v4_cross_edep.csv</code>）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>拓扑</th>
+<th>path 均(cm)</th>
+<th>Edep_min 均(MeV)</th>
+<th>Edep_min 中位(MeV)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T02</td>
+<td>2.05</td>
+<td>3.1</td>
+<td>~2.8</td>
+</tr>
+<tr class="even">
+<td>T13</td>
+<td>2.26</td>
+<td>3.4</td>
+<td>~3.0</td>
+</tr>
+<tr class="odd">
+<td>T03</td>
+<td>1.62</td>
+<td>2.2</td>
+<td>~2.0</td>
+</tr>
+<tr class="even">
+<td>T12</td>
+<td>1.65</td>
+<td>2.4</td>
+<td>~2.1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>B2/B3 proxy：Edep_min &lt; 1 MeV 的比例很低（Landau 尾）→ 正常单缪子 cross-layer 不容易产生极弱 small（Q10,12）。</li>
+</ul>
+<h2 id="step-79修正-o1-光学126-事件θ186-均值28">12. STEP 7–9：修正 O1 光学（126 事件，θ=1–86° 均值28°）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>指标</th>
+<th>OLD O1</th>
+<th><strong>NEW O1</strong></th>
+<th>data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T02 f11</td>
+<td>0.159</td>
+<td><strong>0.157</strong></td>
+<td>0.252</td>
+</tr>
+<tr class="even">
+<td>T02 f10</td>
+<td>0.044</td>
+<td><strong>0.053</strong></td>
+<td>0.083</td>
+</tr>
+<tr class="odd">
+<td>T13 f10</td>
+<td>0.159</td>
+<td><strong>0.163</strong></td>
+<td>0.229</td>
+</tr>
+<tr class="even">
+<td>T13 f11</td>
+<td>0.045</td>
+<td><strong>0.047</strong></td>
+<td>0.083</td>
+</tr>
+<tr class="odd">
+<td>P(M8)<span class="citation" data-cites="1ph">@1ph</span></td>
+<td>0.59</td>
+<td><strong>0.64</strong></td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>P(M8)<span class="citation" data-cites="2ph">@2ph</span></td>
+<td>0.32</td>
+<td><strong>0.44</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>⇒ <strong>修正后 T02/T13 光分享基本不变</strong>（旧截断对 cross-layer 影响小），M8 在低阈值下仍大量（Q13,14）。</p>
+<h2 id="step-10same-layer-光学">13. STEP 10：same-layer 光学</h2>
+<ul>
+<li>P(slab|same-layer)=0 ⇒ <strong>same-layer 单缪子 panel 信号为 0</strong> ⇒ M8 概率为 0。</li>
+<li>数据 7 个 same-M8 全部有 panel M8 ⇒ <strong>不兼容单缪子</strong>。</li>
+</ul>
+<h2 id="step-1214toy-与-mixturefigures07-09tablesv4_mixture.csv">14. STEP 12–14：toy 与 mixture（<code>figures/07-09</code>、<code>tables/v4_mixture.csv</code>）</h2>
+<ul>
+<li><strong>独立多径迹</strong>：same-layer 随 p_multi 缓慢上升但仍远低于 52%。</li>
+<li><strong>相关双径迹</strong>：扫描 s/σ_θ/p_corr；same-layer 随 p_corr 上升。</li>
+<li><strong>最优 mixture</strong>：<strong>f_single=0.00, f_corr=0.25, f_fake=0.75, χ²=0.2</strong> ⇒ 数据拓扑结构需<strong>主要靠 fake/crosstalk + 少量相关多粒子</strong>；纯单缪子(f_single=1)拓扑 χ² 很大。</li>
+</ul>
+<h2 id="核心-20-问回答汇总">15. 核心 20 问回答汇总</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>问题</th>
+<th>结论</th>
+<th>分类</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>收敛 same-layer</td>
+<td>6.65%±0.19%(ESS1172)</td>
+<td>已确认</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>统计误差</td>
+<td>2.9%</td>
+<td>已确认</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>系统学范围</td>
+<td>1.5–18%(角分布主导)</td>
+<td>已确认</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>能否到52%?</td>
+<td>否，最乐观≤18%，5×低</td>
+<td>已确认</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>same-layer穿板?</td>
+<td><strong>P=0</strong></td>
+<td>已确认</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>若穿板M8?</td>
+<td>N/A（不穿板）</td>
+<td>已确认</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>7个same-M8是single?</td>
+<td><strong>不兼容</strong>（无穿板=无panel）</td>
+<td>与实验张力</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>小闪不平衡?</td>
+<td>path天然不平衡(一长一短)</td>
+<td>与MC一致</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>cross-layer穿板?</td>
+<td>100%</td>
+<td>已确认</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>B2/B3弱small?</td>
+<td>Landau尾不足以解释大量弱事件</td>
+<td>与实验张力</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>cross panel≈0?</td>
+<td>低阈值下极少(M8@1ph=64%)</td>
+<td>与实验张力</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>B2/B3 Landau解释?</td>
+<td>部分可，量不够</td>
+<td>部分解释</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>corrected T02/T13</td>
+<td>f11~0.157(不变)</td>
+<td>已确认</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>T03/T12显著变?</td>
+<td>不显著</td>
+<td>已确认</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>M8 threshold</td>
+<td><span class="citation" data-cites="1ph">@1ph</span>=64%, <span class="citation" data-cites="2ph">@2ph</span>=44%</td>
+<td>已确认</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>multi-track same-layer?</td>
+<td>远低于52%</td>
+<td>已确认</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>correlated同层高M3低?</td>
+<td>需~25%corr</td>
+<td>toy可解释</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>fake-hit不自洽?</td>
+<td>mixture需75%fake→量大</td>
+<td>toy边界</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>M3-1超亮?</td>
+<td>与两粒子相容</td>
+<td>待光学详查</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>最合理mixture?</td>
+<td>~0%single+25%corr+75%fake</td>
+<td>当前最佳约束</td>
+</tr>
+</tbody>
+</table>
+<h2 id="系统学预算">16. 系统学预算</h2>
+<table>
+<thead>
+<tr class="header">
+<th>来源</th>
+<th>same-layer影响</th>
+<th>分类</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MC统计</td>
+<td>±0.19%(rel2.9%)</td>
+<td>可控</td>
+</tr>
+<tr class="even">
+<td>角分布n</td>
+<td>1.5–18%</td>
+<td><strong>主导</strong></td>
+</tr>
+<tr class="odd">
+<td>gap</td>
+<td>3.8–11%</td>
+<td>中等</td>
+</tr>
+<tr class="even">
+<td>Lsep</td>
+<td>3.3–11%</td>
+<td>中等</td>
+</tr>
+<tr class="odd">
+<td>对齐</td>
+<td>&lt;±2%</td>
+<td>小</td>
+</tr>
+</tbody>
+</table>
+<h2 id="结论分类">17. 结论分类</h2>
+<ul>
+<li><strong>已由修正MC确认</strong>：same-layer~7%(ESS1172)；P(slab|same-layer)=0；cross-layer P(slab)=1；M8低阈值可达；T02/T13光分享修正后不变。</li>
+<li><strong>与实验存在张力</strong>：7个same-M8不兼容单缪子（无穿板）；B2/B3弱事件量超Landau预期。</li>
+<li><strong>toy可解释</strong>：mixture需~25%corr+75%fake。</li>
+<li><strong>当前不能解释</strong>：same-layer M8的panel信号（需额外机制：穿过slab的多粒子或串扰到panel）。</li>
+<li><strong>需新硬件验证</strong>：小闪/板相对位置精密测量；same-layer事件的waveform/charge详细比较。</li>
 </ul>
 </body>
 </html>

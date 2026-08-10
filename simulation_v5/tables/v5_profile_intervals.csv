@@ -1,0 +1,4 @@
+component,best,1sigma_lo,1sigma_hi
+f_single,0.0,0.0,0.035
+f_corr,0.0,0.0,0.08
+f_fake,1.0,0.92,1.0

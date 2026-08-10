@@ -1,0 +1,3 @@
+model,same_layer_frac
+cos^2 (current),0.0435
+cos^3 (projection-corrected),0.0524

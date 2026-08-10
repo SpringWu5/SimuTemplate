@@ -1,0 +1,42 @@
+Part 1: generator diagnostics (HW=60, ZPLAN=60, n=2)...
+  generator internally unbiased (cos^n, uniform phi/pos, independent). OK
+Part 2: max capturable theta vs plane half-width (z=60)...
+    HW     z   theta_99pct   theta_max
+    60    60          52.9        58.3
+   100    60          64.1        69.2
+   150    60          71.4        74.9
+   200    60          74.3        77.9
+   300    60          77.8        80.1
+   400    60          79.5        82.4
+Part 3: half-width scan (z=60, n=2, L=10)...
+    HW    trig_eff  same_layer      01      23      02      13      03      12
+    60    4.98e-05      0.0000  0.0000  0.0000  0.5217  0.4247  0.0468  0.0067
+   100    2.50e-05      0.0000  0.0000  0.0000  0.2933  0.3400  0.2200  0.1467
+   150    8.00e-06      0.0000  0.0000  0.0000  0.4375  0.2500  0.1667  0.1458
+   200    6.17e-06      0.0000  0.0000  0.0000  0.3514  0.2703  0.2703  0.1081
+   300    2.33e-06      0.0000  0.0000  0.0000  0.2143  0.2857  0.2143  0.2857
+   400    1.33e-06      0.0000  0.0000  0.0000  0.3750  0.2500  0.1250  0.2500
+Part 4: generation-plane height scan (HW=250, n=2, L=10)...
+     z    trig_eff  same_layer      02      13
+     8    3.83e-06      0.1304  0.2609  0.1739
+    10    3.33e-06      0.1000  0.2500  0.2000
+    15    2.50e-06      0.2000  0.0667  0.3333
+    20    4.33e-06      0.0385  0.3846  0.1538
+    60    3.00e-06      0.0000  0.1667  0.4444
+Part 5: CORRECTED reference (z=10, HW=250, n=2, L=10, 2e7 muons)...
+  corrected: {'trig': 80, 'M2': 80, 'M3': 0, 'M4': 0, 'same_layer': 0.025}
+  topology fracs: {'01': 0.025, '23': 0.0, '02': 0.2875, '13': 0.4375, '03': 0.125, '12': 0.125}
+  same-layer events: 2 ; theta min/mean/max = 77.0/81.5/86.0 deg
+Part 6: gap scan with corrected plane (z=10, HW=250)...
+  gap_cm   same_layer_frac
+     0.5            0.8526
+     1.0            0.7742
+     1.5            0.6826
+     2.0            0.5809
+     3.0            0.4944
+     4.0            0.4154
+     6.0            0.2000
+     8.0            0.1667
+    10.0            0.1200
+    12.0            0.0645
+Part 7: projection-factor check (cos^n vs cos^(n+1)) at z=10,HW=250...

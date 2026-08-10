@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>宇宙线生成与几何接受度审计报告</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">宇宙线生成与几何接受度审计报告</h1>
+</header>
+<h1 id="宇宙线生成与几何接受度审计报告sampling-audit">宇宙线生成与几何接受度审计报告（sampling audit）</h1>
+<blockquote>
+<p>本审计由”same-layer double=0 是否受有限 generation plane 截断”这一质疑触发。 结论先行：<strong>旧 MC 确实存在有限平面角度截断偏差；“same-layer=0 / gap≥4→0” 基本是人为假象。修正后 same-layer(gap=10)≈7%，仍比数据 52% 低约 7×，故”单缪子无法解释同层 double”的定性结论成立，但量化差距从”无穷/零”修正为”约 7 倍”。</strong></p>
+</blockquote>
+<hr />
+<h2 id="缪子到底如何采样源码逐行simulation_v3scriptsacceptance_mc.py">1. 缪子到底如何采样（源码逐行，<code>simulation_v3/scripts/acceptance_mc.py</code>）</h2>
+<p>生成函数 <code>gen_muons</code>（L54-66）：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> rng.uniform(<span class="op">-</span>HW, HW, N)<span class="op">;</span> y0 <span class="op">=</span> rng.uniform(<span class="op">-</span>HW, HW, N)   <span class="co"># L56 平面均匀</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>u  <span class="op">=</span> rng.random(N)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cosT <span class="op">=</span> u <span class="op">**</span> (<span class="fl">1.0</span><span class="op">/</span>(n<span class="op">+</span><span class="fl">1.0</span>))                                    <span class="co"># L58 -&gt; dN/dOmega ∝ cos^n θ</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.arccos(cosT)                                      <span class="co"># L59</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>phi  <span class="op">=</span> rng.uniform(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, N)                            <span class="co"># L60 φ均匀</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dx,dy,dz <span class="op">=</span> sinθ cosφ, sinθ sinφ, <span class="op">-</span>cosθ                       <span class="co"># L61-63 方向（向下）</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>P0 <span class="op">=</span> [x0, y0, ZPLAN]                                         <span class="co"># L64 起点在 z=ZPLAN 平面</span></span></code></pre></div>
+<ol type="1">
+<li><strong>x0</strong>：<code>uniform(-HW,HW)</code>；2. <strong>y0</strong>：<code>uniform(-HW,HW)</code>；3. <strong>θ</strong>：<code>cosθ=u^(1/(n+1))</code> ⇒ dN/dΩ∝cosⁿθ；</li>
+<li><strong>φ</strong>：<code>uniform(0,2π)</code>；5. <strong>x0,y0 与 θ,φ 完全独立</strong>；6. <strong>方向从不指向探测器/板/小闪/触发区</strong>（纯各向异性采样）；</li>
+<li><strong><code>--focus</code></strong>（L101-118）只是把<strong>已触发(M≥2)</strong>的径迹落盘，<strong>不改变位置/角度分布、不改变目标方向</strong>；8. focus 不改任何生成；9. <strong>无 importance sampling、无 event weight</strong>；10. <strong>拓扑分数用的是 full unbiased 样本</strong>（<code>summary.json</code> 来自全平面 3e6/点，非 focused）。</li>
+</ol>
+<h2 id="角分布定义投影因子">2. 角分布定义（投影因子）</h2>
+<p>当前 <code>dN/dΩ∝cosⁿθ</code> 对应”<strong>单位水平面积、单位立体角的 flux</strong>”约定（即 flat-detector rate，含几何投影）。若改用”垂直于粒子方向面积的 intensity”约定，水平面 flux 多一个 cosθ ⇒ 应采 cosⁿ⁺¹θ。 - 数值（gap=10, z=10,HW=250）：cos²(当前) same-layer=<strong>4.4%</strong>，cos³(投影修正)=<strong>5.2%</strong> ⇒ 投影因子只移动 ~20%，远小于与 52% 的差距。<strong>定论对约定稳健。</strong></p>
+<h2 id="生成器自身诊断figuressampling_audit01_generator_diagnostics.png">3. 生成器自身诊断（<code>figures/sampling_audit/01_generator_diagnostics.png</code>）</h2>
+<p>cosθ 直方图与解析 3cos²θ（n=2）吻合；φ、x0-y0 均匀；θ-φ、θ-x0 无相关。<strong>生成器内部无异常</strong>——偏差来自<strong>有限平面的接受度</strong>，而非采样算法。</p>
+<h2 id="有限平面角度截断核心问题">4. 有限平面角度截断（核心问题）</h2>
+<p>对 z=60 cm 平面，命中小闪所需 θ 上限（数值，2e6–4e6 缪子，取命中者 99/100 分位）： | HW(cm) | 60 | 100 | 150 | 200 | 300 | 400 | |—|—|—|—|—|—|—| | θ_99 (°) | 52.9 | 64.1 | 71.4 | 74.3 | 77.8 | 79.5 | | θ_max(°) | 58.3 | 69.2 | 74.9 | 77.9 | 80.1 | 82.4 |</p>
+<p>⇒ <strong>旧配置(HW=60,z=60) 最大可生成 θ≈58°；θ≥73°（同层所需）完全无法生成</strong>。即使 HW=400，z=60 下因触发效率随 1/HW² 暴跌、统计不足，same-layer 仍判 0（未收敛）。 <strong>解法</strong>：把平面<strong>移近</strong>探测器。z=10,HW=250 可捕获 θ≤~87°（命中小闪 Δz≈5cm，tanθ_max≈250/5=50 ⇒ θ≤88.9°）。</p>
+<h2 id="收敛扫描02_hw_z_gap_scan.pngtablesaudit_hw_z_scan.csv">5. 收敛扫描（<code>02_hw_z_gap_scan.png</code>、<code>tables/audit_hw_z_scan.csv</code>）</h2>
+<ul>
+<li><strong>HW 扫描(z=60)</strong>：same-layer 全 0（截断+统计，未收敛）。</li>
+<li><strong>z 扫描(HW=250)</strong>：z=8→0.13、z=10→0.10、z=15→0.20、z=20→0.04、z=60→0.0 ⇒ <strong>平面移近即非零</strong>。正确结果应对平面位置不敏感——z=60 因截断失效，z=8-20 给出有限非零值（统计噪声大）。</li>
+</ul>
+<h2 id="修正后-same-layergap10z10hw250-2e7seed">6. 修正后 same-layer（gap=10，z=10,HW=250, 2e7/seed）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>seed</th>
+<th>M2</th>
+<th>same-layer</th>
+<th>frac</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>21</td>
+<td>80</td>
+<td>2</td>
+<td>0.025</td>
+</tr>
+<tr class="even">
+<td>55</td>
+<td>81</td>
+<td>7</td>
+<td>0.086</td>
+</tr>
+<tr class="odd">
+<td>77</td>
+<td>78</td>
+<td>8</td>
+<td>0.103</td>
+</tr>
+<tr class="even">
+<td><strong>mean</strong></td>
+<td>—</td>
+<td>—</td>
+<td><strong>~0.07</strong></td>
+</tr>
+</tbody>
+</table>
+<p>⇒ <strong>修正 same-layer(gap=10) ≈ 7%（Poisson 误差大，约 2.5–10%）</strong>；同层径迹 θ=77–86°（与解析 θ≥76° 一致）。<strong>仍比数据 52% 低约 7×</strong>。</p>
+<h2 id="gap-扫描old截断-vs-new修正tablesaudit_gap_old_vs_new.csv">7. gap 扫描：OLD(截断) vs NEW(修正)（<code>tables/audit_gap_old_vs_new.csv</code>）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>gap(cm)</th>
+<th>0.5</th>
+<th>1</th>
+<th>1.5</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>6</th>
+<th>8</th>
+<th>10</th>
+<th>12</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OLD</td>
+<td>0.48</td>
+<td>0.48</td>
+<td>0.27</td>
+<td>0.14</td>
+<td>0.002</td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="even">
+<td>NEW</td>
+<td>0.85</td>
+<td>0.77</td>
+<td>0.68</td>
+<td>0.58</td>
+<td>0.49</td>
+<td><strong>0.42</strong></td>
+<td>0.20</td>
+<td>0.17</td>
+<td><strong>0.12</strong></td>
+<td>0.06</td>
+</tr>
+</tbody>
+</table>
+<p>⇒ <strong>旧”gap≥4→0” 完全是截断假象</strong>；修正后 same-layer 在所有 gap 非零，随 gap 单调下降（gap=10→~7-12%）。</p>
+<h2 id="光学样本-o1-是否受影响03_o1_theta.png">8. 光学样本 O1 是否受影响（<code>03_O1_theta.png</code>）</h2>
+<p>O1 的”真实宇宙线触发径迹”(<code>muons_stacked.json</code>) 来自<strong>同一个截断生成器</strong>：其 θ=<strong>0–45°（均值 14°），&gt;55° 占比 0</strong>。⇒ O1 严重偏垂直。 - <strong>T02/T13 光分享结论</strong>：跨层径迹本身以小 θ 为主（cos²θ），θ≤45° 捕获了通量主体(&gt;90%)，故 f_i / X_front / M8 的<strong>定性结论稳健</strong>；但<strong>定量来自偏垂直样本</strong>，严格起见需用修正平面重生 O1。 - same-layer(θ≥76°) 径迹在 O1 中<strong>完全缺失</strong> ⇒ O1 不能用来评估同层事件的 panel 响应。</p>
+<h2 id="旧结论修正表old-new-原因">9. 旧结论修正表（OLD / NEW / 原因）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>旧结论</th>
+<th>修正后</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>gap=10 same-layer=0</td>
+<td><strong>~7%</strong></td>
+<td>平面截断去除</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>same-layer 仅 gap≤2cm</td>
+<td><strong>错误</strong>：所有 gap 非零(gap=10→7%,12→6%)</td>
+<td>截断假象</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>单缪子 M3=0</td>
+<td><strong>成立</strong>(修正仍 M3=0)</td>
+<td>几何，与平面无关</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>M4=0</td>
+<td><strong>成立</strong></td>
+<td>同上</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>六拓扑分数(01=23=0)</td>
+<td>01+23≈7%(非0)；02/13 仍主导</td>
+<td>截断去除</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>multi-track 不能达 52%</td>
+<td><strong>成立</strong>(差距~7×而非无穷)</td>
+<td>修正后同层仍≪52%</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>fake-hit 不自洽</td>
+<td><strong>成立</strong></td>
+<td>同上</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>跨层 P(穿板)=1</td>
+<td><strong>成立</strong></td>
+<td>几何，与平面无关</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>T03/T12 小</td>
+<td>大致成立(需补统计)</td>
+<td>跨层对角，主要被捕获</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>clipping/path-length：无长径迹事件</td>
+<td><strong>需重做</strong>：修正后存在 θ≥76° 长径迹同层事件</td>
+<td>截断去除→长 path 事件出现</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>O1 真实径迹光分享</td>
+<td><strong>定性稳健、定量偏垂直</strong>；需修正平面重生</td>
+<td>O1 来自截断生成器</td>
+</tr>
+</tbody>
+</table>
+<h2 id="十三个审计问题回答">10. 十三个审计问题回答</h2>
+<ol type="1">
+<li><strong>旧 MC 是否有有限平面角度偏差？</strong> 是。HW=60,z=60 截断 θ≳55°。</li>
+<li><strong>是否完全禁止 θ≥73° 同层径迹？</strong> 是（旧平面 θ_max≈58°）。</li>
+<li><strong>旧 same-layer=0 多少是 generator artifact？</strong> 基本全部（修正后 ~7%）。</li>
+<li><strong>平面多大收敛？</strong> 平面需<strong>靠近</strong>(z≈10cm)且 HW≈250cm；z=60 需 HW≥400+海量统计（不实用）。</li>
+<li><strong>修正后单缪子 same-layer？</strong> gap=10 ≈ <strong>7%</strong>（2.5–10% Poisson）。</li>
+<li><strong>与数据 52% 差距？</strong> 约 <strong>7 倍</strong>。</li>
+<li><strong>修正后 M3？</strong> 0（仍）。</li>
+<li><strong>multi-track/fake-hit 结论是否变？</strong> 定性不变（仍≪52%）；量化差距从”无穷”→“~7×”。</li>
+<li><strong>T02/T13 光分享是否稳健？</strong> 定性稳健（跨层以小θ为主被捕获）；定量需修正平面重生 O1。</li>
+<li><strong>T03/T12 与 M8 阈值结论是否变？</strong> T03/T12 几何结论大致不变；M8 来自偏垂直 O1，需重生核实。</li>
+</ol>
+<h2 id="产出">11. 产出</h2>
+<ul>
+<li>图：<code>figures/sampling_audit/{01_generator_diagnostics, 02_hw_z_gap_scan, 03_O1_theta, 05_corrected_samelayer_kin}.png</code></li>
+<li>表：<code>tables/audit_{hw_z_scan, gap_old_vs_new, projection, corrected_summary}.csv</code></li>
+<li>脚本：<code>scripts/{audit_sampling.py, audit2.py}</code></li>
+</ul>
+<h2 id="待办修正后需重做">12. 待办（修正后需重做）</h2>
+<ol type="1">
+<li>用修正平面(z=10,HW=250 或更优)重生 O1 光学样本，重算 T02/T13/T03/T12 的 f_i、X_front、M8。</li>
+<li>重做 clipping/path-length 分析（修正后含长径迹同层事件）。</li>
+<li>对 same-layer 做重要性采样(method C)以缩小 ~7% 的 Poisson 误差。</li>
+</ol>
+</body>
+</html>

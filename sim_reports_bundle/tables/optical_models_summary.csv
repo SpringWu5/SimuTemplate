@@ -1,0 +1,6 @@
+model,surface,key_result,note
+O0 vertical-local,specular-like local,Ch4 f=0.863,baseline reproduced (~0.86)
+O1 real cosmic,diffuse ESR (frontpainted),uniform 0.10-0.15,local 0.86->0.15 by track spread; T02 f11=0.159(data 0.252)
+O2 roughness a=5/10/20,"frontpainted, vary sigma_alpha",f11=0.159 (unchanged),frontpainted is roughness-INSENSITIVE
+O4 reflectivity 0.90,"diffuse, R=0.90",f11=0.159 (unchanged),fraction is reflectivity-normalized (expected)
+O3 specular (polished),specular ESR,(runaway),photon trapping -> prohibitive; not physical for ESR

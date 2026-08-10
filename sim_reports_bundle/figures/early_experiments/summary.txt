@@ -1,0 +1,7 @@
+SiPM-sizing experiment summary
+
+C1 (6mm): events=250 mean_photons=119.34 photons_per_MeV=31.2 siteCV=0.038
+
+C2 (3mm): events=250 mean_photons=30.30 photons_per_MeV=7.8 siteCV=0.026
+
+C3 (2x2 array): events=250 mean_photons=120.97 photons_per_MeV=31.1 siteCV=0.043

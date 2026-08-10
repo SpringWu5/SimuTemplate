@@ -1,0 +1,5 @@
+block vs slab (muon over one slab SiPM)
+Block SiPM: 605.0 ph/mu, 105.44 ph/MeV, Edep=5.74 MeV
+Slab under-SiPM: 474.7 ph/mu, 123.06 ph/MeV, Edep=3.86 MeV
+Slab other-7 (avg): 5.6 ph/mu, 1.44 ph/MeV, Edep=3.86 MeV
+Slab all-8 (avg): 64.2 ph/mu, 16.64 ph/MeV, Edep=3.86 MeV

@@ -1,0 +1,3 @@
+model,param_for_same_layer,best_G,best_param,note
+multi-track,unreachable,3.4,0.98,2nd independent cosmic track w.p. p_multi
+fake-hit,unreachable,0.3,0.16,random fake trigger hit w.p. p_fake

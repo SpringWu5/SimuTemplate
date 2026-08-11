@@ -1,0 +1,15 @@
+major_ch,minor_ch,n,k_median,k_std,relation
+0,1,46,0.443,0.271,same-layer-neigh
+0,2,39,0.602,0.316,cross-layer
+0,3,12,0.376,0.267,cross-layer
+1,0,33,0.292,0.259,same-layer-neigh
+1,2,12,0.563,0.283,cross-layer
+1,3,12,0.816,0.268,cross-layer
+2,0,19,0.369,0.303,cross-layer
+2,1,8,0.574,0.258,cross-layer
+2,3,29,0.323,0.142,same-layer-neigh
+3,0,13,0.477,0.242,cross-layer
+3,1,13,0.481,0.348,cross-layer
+3,2,28,0.368,0.22,same-layer-neigh
+same_layer_neigh_median,,136,0.346,,
+cross_layer_median,,128,0.51,,

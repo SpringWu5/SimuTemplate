@@ -1,0 +1,9 @@
+test,pearson,dof,p_pearson,p_gtest,verdict
+FIT_A_1-comp single,75.81,4,0.0,1.0,INADEQUATE
+FIT_A_2-comp,10.39,5,0.0648,0.0814,ADEQUATE
+FIT_A_3-comp,10.39,4,0.0343,0.0441,ADEQUATE
+FIT_A_4-comp,10.39,3,0.0155,0.0204,ADEQUATE
+FIT_B_4comp,17.48,9,0.0417,0.034,ADEQUATE
+PPC_M3_P_Neq2,0.27115,,,,
+PPC_M3_P_Nge2,0.60765,,,,
+PPC_sameM8_P_Nle7,0.00395,,,,

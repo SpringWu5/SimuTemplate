@@ -1,0 +1,4 @@
+fit,pearson,dof,pvalue,verdict,frac
+FIT_A,8.9,3,0.031,ADEQUATE,"[0.0, 0.0, 0.5, 0.5]"
+FIT_B,19.7,9,0.0198,ADEQUATE,"[0.417, 0.5, 0.0, 0.083]"
+FIT_C,94.5,12,0.0,INADEQUATE,"[0.5, 0.4, 0.0, 0.1]"
